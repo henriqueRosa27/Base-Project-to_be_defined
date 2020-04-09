@@ -1,8 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
-import Class from './Class';
-
 class User extends Model {
   static init(sequelize) {
     super.init(
@@ -20,12 +18,17 @@ class User extends Model {
         user.password = await bcrypt.hash(user.password, 8);
       }
     });
+
     return this;
   }
 
   static associate(models) {
     this.hasMany(models.Class);
-    this.belongsToMany(models.Class, { through: 'Student_Class' });
+    this.belongsToMany(models.Class, {
+      trough: 'Student_Class',
+      as: 'Classes',
+    });
+    this.hasMany(models.Activity_Delivery, { as: 'Activities_Delivered' });
   }
 
   checkPassword(password) {
