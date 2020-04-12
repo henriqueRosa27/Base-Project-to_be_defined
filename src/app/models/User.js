@@ -6,7 +6,7 @@ class User extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        surame: Sequelize.STRING,
+        surname: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.STRING,
       },
@@ -23,12 +23,9 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Class);
     this.belongsToMany(models.Class, {
-      trough: 'Student_Class',
-      as: 'Classes',
+      through: 'Student_Class',
     });
-    this.hasMany(models.Activity_Delivery, { as: 'Activities_Delivered' });
   }
 
   checkPassword(password) {

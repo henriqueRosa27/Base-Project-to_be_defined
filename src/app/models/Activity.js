@@ -11,11 +11,11 @@ class Activity extends Model {
       },
       { sequelize }
     );
+    return this;
   }
 
   static associate(models) {
     this.belongsTo(models.Class, { as: 'Class', foreignKey: 'id_class' });
-    this.hasMany(models.Activity_Delivery, { as: 'Activities_Delivered' });
   }
 }
 

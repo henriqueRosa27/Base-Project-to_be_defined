@@ -17,10 +17,9 @@ class Class extends Model {
   static associate(models) {
     this.belongsTo(models.User, { as: 'teacher', foreignKey: 'id_teacher' });
     this.belongsToMany(models.User, {
-      trough: 'Student_Class',
+      through: 'Student_Class',
       as: 'Students',
     });
-    this.hasMany(models.Activity, { as: 'Activities' });
   }
 }
 
