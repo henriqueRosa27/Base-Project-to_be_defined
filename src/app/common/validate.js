@@ -2,7 +2,10 @@ import map from 'lodash/map';
 
 const formatValidationErrors = (errors) => {
   const formattedErrors = {
-    errors: [],
+    success: false,
+    object: {
+      errors: []
+    },
   };
 
   map(errors.inner, (value) => {
@@ -11,7 +14,7 @@ const formatValidationErrors = (errors) => {
       attribute: value.path,
       errors: value.errors
     }
-    formattedErrors.errors.push(error);
+    formattedErrors.object.errors.push(error);
   });
 
   return formattedErrors;
@@ -20,8 +23,11 @@ const formatValidationErrors = (errors) => {
 const validate = async (schema, object) => {
   const resultValidation = await schema
     .validate(object, { abortEarly: false })
-    .then(() => {
-      return null;
+    .then((obj) => {
+      return {
+        success: true,
+        object: obj
+      };
     })
     .catch((err) => {
       return formatValidationErrors(err);
