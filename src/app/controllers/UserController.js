@@ -27,9 +27,7 @@ class UserController {
   async create(req, res) {
     const result = await validate(schema, req.body);
 
-    if (!result.success) {
-      return res.status(400).json(result.object).send();
-    }
+    if (!result.success) return res.status(400).json(result.object).send();
 
     const { id, name, surname, email } = await User.create(result.object);
 
