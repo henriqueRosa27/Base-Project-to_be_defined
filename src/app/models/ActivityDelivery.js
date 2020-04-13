@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Activity_Delivery extends Model {
+class ActivityDelivery extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -10,7 +10,7 @@ class Activity_Delivery extends Model {
         image: Sequelize.STRING,
         feedback: Sequelize.STRING,
       },
-      { sequelize }
+      { sequelize, modelName: 'Activity_Delivery' }
     );
     return this;
   }
@@ -24,4 +24,4 @@ class Activity_Delivery extends Model {
   }
 }
 
-export default Activity_Delivery;
+export default ActivityDelivery;

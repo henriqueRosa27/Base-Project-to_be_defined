@@ -31,6 +31,16 @@ class ClassController {
         id: req.params.id,
       },
       attributes: ['id', 'name', 'topic', 'code', 'creation_date'],
+      include: [
+        {
+          model: User,
+          as: 'students',
+        },
+        {
+          model: User,
+          as: 'teacher',
+        },
+      ],
     });
 
     return res.json(clas);
@@ -44,6 +54,16 @@ class ClassController {
         code: req.params.code,
       },
       attributes: ['id', 'name', 'topic', 'code', 'creation_date'],
+      include: [
+        {
+          model: User,
+          as: 'students',
+        },
+        {
+          model: User,
+          as: 'teacher',
+        },
+      ],
     });
 
     return res.json(clas);

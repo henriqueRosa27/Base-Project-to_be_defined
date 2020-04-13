@@ -2,14 +2,14 @@ import Sequelize from 'sequelize';
 // importo o model user da minha aplicacao
 import User from '../app/models/User';
 import Class from '../app/models/Class';
-import Student_Class from '../app/models/Student_Class';
+import StudentClass from '../app/models/StudentClass';
 import Activity from '../app/models/Activity';
-import Activity_Delivery from '../app/models/Activity_Delivery';
+import ActivityDelivery from '../app/models/ActivityDelivery';
 // importo as configuracoes de conexao com o banco
 import databaseConfig from '../config/database';
 
 // aqui vai ser um array contendo todos os models da minha aplicacao
-const models = [User, Class, Student_Class, Activity, Activity_Delivery];
+const models = [User, Class, StudentClass, Activity, ActivityDelivery];
 
 class Database {
   constructor() {

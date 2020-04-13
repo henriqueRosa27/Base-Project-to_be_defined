@@ -3,6 +3,7 @@ import { Router } from 'express';
 import UserController from '../app/controllers/UserController';
 import ClassController from '../app/controllers/ClassController';
 import SessionController from '../app/controllers/SessioController';
+import StudentClassContoller from '../app/controllers/StudentClassContoller';
 import authMiddleware from '../app/middlewares/auth';
 
 const routes = new Router();
@@ -21,5 +22,8 @@ routes.get('/class/byCode/:code', ClassController.getByCode);
 routes.post('/class', ClassController.create);
 routes.put('/class/:id', ClassController.update);
 routes.delete('/class/:id', ClassController.delete);
+
+routes.post('/linkUserClass/code', StudentClassContoller.linkByCode);
+routes.post('/linkUserClass/email', StudentClassContoller.linkByEmail);
 
 export default routes;

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import User from '../models/User';
 
 const schema = Yup.object().shape({

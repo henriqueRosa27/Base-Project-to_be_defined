@@ -1,15 +1,16 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Student_Class extends Model {
+class StudentClass extends Model {
   static init(sequelize) {
     super.init(
       {
         entry_date: Sequelize.DATE,
       },
-      { sequelize }
+      { sequelize, modelName: 'Student_Class' }
     );
     return this;
   }
+
 
   static associate(models) {
     this.belongsTo(models.User, { as: 'Student', foreignKey: 'id_user' });
@@ -17,4 +18,4 @@ class Student_Class extends Model {
   }
 }
 
-export default Student_Class;
+export default StudentClass;
