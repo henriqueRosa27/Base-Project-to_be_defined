@@ -12,7 +12,7 @@ class UserController {
   }
 
   async getById(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const user = await User.findOne({
       where: {

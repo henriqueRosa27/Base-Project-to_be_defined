@@ -24,7 +24,7 @@ class ClassController {
   }
 
   async getById(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id) return res.status(404).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const clas = await Class.findOne({
       where: {
@@ -47,7 +47,7 @@ class ClassController {
   }
 
   async getByCode(req, res) {
-    if (!req.params.code) return res.json(null);
+    if (!req.params.code) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const clas = await Class.findOne({
       where: {
@@ -91,7 +91,7 @@ class ClassController {
   }
 
   async update(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const result = await validate(schema, req.body);
 
@@ -125,7 +125,7 @@ class ClassController {
   }
 
   async delete(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const clas = await Class.findOne({
       where: {

@@ -24,20 +24,20 @@ class StudentClassContoller {
         },
       ],
     });
-    if (!clas) return res.json(null);
+    if (!clas) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     const user = await User.findOne({
       where: {
         email: object.email,
       },
     });
-    if (!user) return res.json(null);
+    if (!user) return res.status(400).json({errors: { errors: ["Usuario não encontrado"]}});
 
     if (
       clas.students.some((student) => student.id === user.id) ||
       clas.id_teacher === user.id
     )
-      return res.json(null);
+      return res.status(400).json({errors: { errors: ["Usuario já vinculado a essa turma"]}});
 
     const link = {
       id_class: clas.id,
@@ -72,13 +72,13 @@ class StudentClassContoller {
         },
       ],
     });
-    if (!clas) return res.json(null);
+    if (!clas) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
 
     if (
       clas.students.some((student) => student.id === userId) ||
       clas.id_teacher === userId
     )
-      return res.json(null);
+      return res.status(400).json({errors: { errors: ["Usuario já vinculado a essa turma"]}});
 
     const link = {
       id_class: clas.id,
