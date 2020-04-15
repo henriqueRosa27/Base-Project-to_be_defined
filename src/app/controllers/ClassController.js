@@ -129,13 +129,7 @@ class ClassController {
         .status(404)
         .json({ errors: { errors: ['Nenhum registro encontrado'] } });
 
-    clas.name = object.name;
-    clas.topic = object.topic;
-    clas.id = req.params.id;
-
-    await clas.save();
-
-    const { id, name, topic, code, creation_date } = clas;
+    const { id, name, topic, code, creation_date } = await clas.update(object);
 
     return res.json({
       id,
