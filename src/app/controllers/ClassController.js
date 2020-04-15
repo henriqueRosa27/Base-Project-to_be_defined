@@ -3,7 +3,7 @@ import uniqid from 'uniqid';
 import Class from '../models/Class';
 import User from '../models/User';
 import validate from '../common/validate';
-import schema from '../schemas/class';
+import schema from '../shemasValidation/class';
 
 class ClassController {
   async getAll(req, res) {
@@ -24,7 +24,10 @@ class ClassController {
   }
 
   async getById(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id)
+      return res
+        .status(400)
+        .json({ errors: { errors: ['Paramêtro informado inválido'] } });
 
     const clas = await Class.findOne({
       where: {
@@ -43,11 +46,19 @@ class ClassController {
       ],
     });
 
+    if (!clas)
+      return res
+        .status(404)
+        .json({ errors: { errors: ['Nenhum registro encontrado'] } });
+
     return res.json(clas);
   }
 
   async getByCode(req, res) {
-    if (!req.params.code) return res.json(null);
+    if (!req.params.code)
+      return res
+        .status(400)
+        .json({ errors: { errors: ['Paramêtro informado inválido'] } });
 
     const clas = await Class.findOne({
       where: {
@@ -65,6 +76,11 @@ class ClassController {
         },
       ],
     });
+
+    if (!clas)
+      return res
+        .status(404)
+        .json({ errors: { errors: ['Nenhum registro encontrado'] } });
 
     return res.json(clas);
   }
@@ -91,7 +107,10 @@ class ClassController {
   }
 
   async update(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id)
+      return res
+        .status(400)
+        .json({ errors: { errors: ['Paramêtro informado inválido'] } });
 
     const result = await validate(schema, req.body);
 
@@ -105,7 +124,10 @@ class ClassController {
       },
     });
 
-    if (!clas) return res.json(null);
+    if (!clas)
+      return res
+        .status(404)
+        .json({ errors: { errors: ['Nenhum registro encontrado'] } });
 
     clas.name = object.name;
     clas.topic = object.topic;
@@ -125,7 +147,10 @@ class ClassController {
   }
 
   async delete(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id)
+      return res
+        .status(400)
+        .json({ errors: { errors: ['Paramêtro informado inválido'] } });
 
     const clas = await Class.findOne({
       where: {
@@ -133,15 +158,18 @@ class ClassController {
       },
     });
 
-    if (!clas) return res.json(null);
+    if (!clas)
+      return res
+        .status(404)
+        .json({ errors: { errors: ['Nenhum registro encontrado'] } });
 
-    const teste = await Class.destroy({
+    await Class.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    return res.json(teste);
+    return res.json();
   }
 }
 

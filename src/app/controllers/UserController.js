@@ -1,6 +1,6 @@
 import User from '../models/User';
 import validate from '../common/validate';
-import schema from '../schemas/user';
+import schema from '../shemasValidation/user';
 
 class UserController {
   async getAll(req, res) {
@@ -12,7 +12,10 @@ class UserController {
   }
 
   async getById(req, res) {
-    if (!req.params.id) return res.json(null);
+    if (!req.params.id)
+      return res
+        .status(400)
+        .json({ errors: { errors: ['Paramêtro informado inválido'] } });
 
     const user = await User.findOne({
       where: {
@@ -20,6 +23,11 @@ class UserController {
       },
       attributes: ['id', 'name', 'surname', 'email'],
     });
+
+    if (!user)
+      return res
+        .status(404)
+        .json({ errors: { errors: ['Nenhum registro encontrado'] } });
 
     return res.json(user);
   }
