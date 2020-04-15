@@ -2,8 +2,8 @@ import User from '../models/User';
 import Class from '../models/Class';
 import StudentClass from '../models/StudentClass';
 import validate from '../common/validate';
-import schemaEmail from '../shemasValidation/StudentClass/linkByEmail';
-import schemaCode from '../shemasValidation/StudentClass/linkByCode';
+import schemaEmail from '../schemasValidation/StudentClass/linkByEmail';
+import schemaCode from '../schemasValidation/StudentClass/linkByCode';
 
 class StudentClassContoller {
   async linkByEmail(req, res) {

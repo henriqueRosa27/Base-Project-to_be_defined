@@ -27,7 +27,8 @@ routes.delete('/class/:id', ClassController.delete);
 routes.post('/linkUserClass/code', StudentClassContoller.linkByCode);
 routes.post('/linkUserClass/email', StudentClassContoller.linkByEmail);
 
-routes.gets('/activity', ActivityController.getAll);
+routes.get('/activity', ActivityController.getAll);
 routes.get('/activity/:id', ActivityController.getById);
+routes.post('/activity', ActivityController.create);
 
 export default routes;

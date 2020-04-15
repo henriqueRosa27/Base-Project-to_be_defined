@@ -3,7 +3,7 @@ import uniqid from 'uniqid';
 import Class from '../models/Class';
 import User from '../models/User';
 import validate from '../common/validate';
-import schema from '../shemasValidation/class';
+import schema from '../schemasValidation/class';
 
 class ClassController {
   async getAll(req, res) {

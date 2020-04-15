@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/User';
 import validate from '../common/validate';
-import loginSchema from '../shemasValidation/login';
+import loginSchema from '../schemasValidation/login';
 import authConfig from '../../config/auth';
 
 class UserController {

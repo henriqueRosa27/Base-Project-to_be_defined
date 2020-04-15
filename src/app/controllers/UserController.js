@@ -1,6 +1,6 @@
 import User from '../models/User';
 import validate from '../common/validate';
-import schema from '../shemasValidation/user';
+import schema from '../schemasValidation/user';
 
 class UserController {
   async getAll(req, res) {
