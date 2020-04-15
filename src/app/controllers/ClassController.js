@@ -24,14 +24,10 @@ class ClassController {
   }
 
   async getById(req, res) {
-<<<<<<< HEAD
     if (!req.params.id)
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
-=======
-    if (!req.params.id) return res.status(404).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
->>>>>>> c2c083f08be5ef6d498e3ad0d82fd7c197475e6b
 
     const clas = await Class.findOne({
       where: {
@@ -59,14 +55,10 @@ class ClassController {
   }
 
   async getByCode(req, res) {
-<<<<<<< HEAD
     if (!req.params.code)
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
-=======
-    if (!req.params.code) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
->>>>>>> c2c083f08be5ef6d498e3ad0d82fd7c197475e6b
 
     const clas = await Class.findOne({
       where: {
@@ -115,14 +107,10 @@ class ClassController {
   }
 
   async update(req, res) {
-<<<<<<< HEAD
     if (!req.params.id)
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
-=======
-    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
->>>>>>> c2c083f08be5ef6d498e3ad0d82fd7c197475e6b
 
     const result = await validate(schema, req.body);
 
@@ -153,14 +141,10 @@ class ClassController {
   }
 
   async delete(req, res) {
-<<<<<<< HEAD
     if (!req.params.id)
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
-=======
-    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
->>>>>>> c2c083f08be5ef6d498e3ad0d82fd7c197475e6b
 
     const clas = await Class.findOne({
       where: {

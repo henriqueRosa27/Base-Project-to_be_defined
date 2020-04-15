@@ -4,6 +4,7 @@ import UserController from '../app/controllers/UserController';
 import ClassController from '../app/controllers/ClassController';
 import SessionController from '../app/controllers/SessioController';
 import StudentClassContoller from '../app/controllers/StudentClassContoller';
+import ActivityController from '../app/controllers/ActivityController';
 import authMiddleware from '../app/middlewares/auth';
 
 const routes = new Router();
@@ -25,5 +26,8 @@ routes.delete('/class/:id', ClassController.delete);
 
 routes.post('/linkUserClass/code', StudentClassContoller.linkByCode);
 routes.post('/linkUserClass/email', StudentClassContoller.linkByEmail);
+
+routes.gets('/activity', ActivityController.getAll);
+routes.get('/activity/:id', ActivityController.getById);
 
 export default routes;

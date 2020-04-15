@@ -12,14 +12,10 @@ class UserController {
   }
 
   async getById(req, res) {
-<<<<<<< HEAD
     if (!req.params.id)
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
-=======
-    if (!req.params.id) return res.status(400).json({errors: { errors: ["Parâmetros passados são insuficientes"]}});
->>>>>>> c2c083f08be5ef6d498e3ad0d82fd7c197475e6b
 
     const user = await User.findOne({
       where: {
