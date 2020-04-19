@@ -4,11 +4,12 @@ class ActivityDelivery extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
+        note: Sequelize.STRING,
         delivery_date: Sequelize.DATE,
         report: Sequelize.STRING,
         image: Sequelize.STRING,
         feedback: Sequelize.STRING,
+        id_activity : Sequelize.INTEGER
       },
       { sequelize, modelName: 'Activity_Delivery' }
     );

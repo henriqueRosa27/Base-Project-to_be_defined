@@ -24,7 +24,7 @@ class ClassController {
   }
 
   async getById(req, res) {
-    if (!req.params.id)
+    if (!req.params.id || !Number.isInteger(req.params.id))
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
@@ -107,7 +107,7 @@ class ClassController {
   }
 
   async update(req, res) {
-    if (!req.params.id)
+    if (!req.params.id || !Number.isInteger(req.params.id))
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });
@@ -141,7 +141,7 @@ class ClassController {
   }
 
   async delete(req, res) {
-    if (!req.params.id)
+    if (!req.params.id || !Number.isInteger(req.params.id))
       return res
         .status(400)
         .json({ errors: { errors: ['Paramêtro informado inválido'] } });

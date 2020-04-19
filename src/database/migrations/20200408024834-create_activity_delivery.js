@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      note: {
         type: Sequelize.STRING(200),
         allowNull: false,
       },
@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
       },
       image: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(200),
         allowNull: false,
       },
       feedback: {

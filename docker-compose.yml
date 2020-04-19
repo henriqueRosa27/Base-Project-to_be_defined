@@ -3,12 +3,13 @@ version: '3'
 services:
   postgres-compose:
     image: postgres
+    restart: always
     environment:
       POSTGRES_PASSWORD: '123456789!'
     ports:
       - '5432:5432'
     volumes:
-      - /home/renatogroffe/Desenvolvimento/Docker-Compose/PostgreSQL:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data:Z
     networks:
       - postgres-compose-network
 
@@ -23,6 +24,10 @@ services:
       - postgres-compose
     networks:
       - postgres-compose-network
+
+volumes:
+  postgres-data:
+      external: true
 
 networks:
   postgres-compose-network:

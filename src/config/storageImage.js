@@ -2,9 +2,10 @@ import multer from 'multer';
 import crypto from 'crypto';
 import { extname, resolve } from 'path';
 
-export default {
+module.exports = {
   storage: multer.diskStorage({
     destination: resolve(__dirname, '..', '..', 'tmp', 'uploads'),
+    // eslint-disable-next-line consistent-return
     filename: (req, file, cb) => {
       crypto.randomBytes(16, (err, res) => {
         if (err) return cb(err);
