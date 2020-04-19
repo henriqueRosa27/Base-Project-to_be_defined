@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import User from '../models/User';
 
 const schema = Yup.object().shape({
-  name: Yup.string('Dado inválido').required('Campo obrigtório'),
+  name: Yup.string('Dado inválido').required('Campo obrigatório'),
   surname: Yup.string('Dado invaálido').required('Campo obrigatório'),
   email: Yup.string('Dado inválido')
     .required('Campo obrigatório')

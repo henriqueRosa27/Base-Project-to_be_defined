@@ -30,5 +30,7 @@ routes.post('/linkUserClass/email', StudentClassContoller.linkByEmail);
 routes.get('/activity', ActivityController.getAll);
 routes.get('/activity/:id', ActivityController.getById);
 routes.post('/activity', ActivityController.create);
+routes.put('/activity/:id', ActivityController.update);
+routes.delete('/activity/:id', ActivityController.delete);
 
 export default routes;

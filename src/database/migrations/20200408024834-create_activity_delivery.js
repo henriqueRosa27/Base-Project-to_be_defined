@@ -25,7 +25,7 @@ module.exports = {
       },
       feedback: {
         type: Sequelize.STRING(200),
-        allowNull: false,
+        allowNull: true,
       },
       id_user: {
         type: Sequelize.INTEGER,
