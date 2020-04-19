@@ -21,7 +21,7 @@ module.exports = {
       },
       deadline: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       id_class: {
         type: Sequelize.INTEGER,
