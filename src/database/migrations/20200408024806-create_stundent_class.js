@@ -1,39 +1,42 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Usuario_Turma', {
+    return queryInterface.createTable('Student_Class', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
-      data_ingresso: {
+      entry_date: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
-      id_usuario: {
+      id_user: {
         type: Sequelize.INTEGER,
-        references: { model: 'usuario', key: 'id' },
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      id_turma: {
-        type: Sequelize.INTEGER,
-        references: { model: 'turma', key: 'id' },
+        references: { model: 'User', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
       },
-      updatedAt: {
+      id_class: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Class', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: false,
+      },
+      created_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
+
   down: (queryInterface) => {
-    return queryInterface.dropTable('Usuario_Turma');
+    return queryInterface.dropTable('Student_Class');
   },
 };

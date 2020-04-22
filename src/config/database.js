@@ -3,11 +3,12 @@ module.exports = {
   host: '127.0.0.1',
   port: '5432',
   username: 'postgres',
-  password: '1234',
+  password: '123456789!',
   database: 'to-be-defined',
   define: {
-    timestamps: true,
+    timestamp: true,
     underscored: true,
     underscoredAll: true,
+    freezeTableName: true,
   },
 };
