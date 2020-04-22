@@ -9,7 +9,7 @@ class UserController {
   async login(req, res) {
     const result = await validate(loginSchema, req.body);
 
-    if (!result.success) return res.status(401).json(result.object).send();
+    if (!result.success) return res.status(400).json(result.object).send();
 
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
