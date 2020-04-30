@@ -6,11 +6,16 @@ module.exports = {
   port: process.env.DB_PORT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASS,
-  database: process.env.DB_NAMEs,
+  database: process.env.DB_NAME,
   define: {
     timestamp: true,
     underscored: true,
     underscoredAll: true,
     freezeTableName: true,
+  },
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
   },
 };
