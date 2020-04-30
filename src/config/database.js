@@ -1,10 +1,12 @@
+require('dotenv/config');
+
 module.exports = {
-  dialect: 'postgres',
-  host: '127.0.0.1',
-  port: '5432',
-  username: 'postgres',
-  password: '123456789!',
-  database: 'to-be-defined',
+  dialect: process.env.DB_DIALECT,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAMEs,
   define: {
     timestamp: true,
     underscored: true,
