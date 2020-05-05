@@ -2,12 +2,13 @@ import { Router } from 'express';
 
 import UserController from '../app/controllers/UserController';
 import ClassController from '../app/controllers/ClassController';
-import SessionController from '../app/controllers/SessioController';
+import SessionController from '../app/controllers/SessionController';
 import StudentClassContoller from '../app/controllers/StudentClassContoller';
 import ActivityController from '../app/controllers/ActivityController';
 import ActivityDeliveryController from '../app/controllers/ActivityDeliveryController';
+import OCRController from '../app/controllers/OCRController';
 import authMiddleware from '../app/middlewares/auth';
-import uploadImage from '../app/middlewares/uploadImage'
+import uploadImage from '../app/middlewares/uploadImage';
 
 const routes = new Router();
 
@@ -42,6 +43,11 @@ routes.post(
   uploadImage,
   ActivityDeliveryController.create
 );
-routes.put('/activityDelivery/sendFeedback', ActivityDeliveryController.sendFeedback);
+routes.put(
+  '/activityDelivery/sendFeedback',
+  ActivityDeliveryController.sendFeedback
+);
+
+routes.post('/ocr', uploadImage, OCRController.create);
 
 export default routes;

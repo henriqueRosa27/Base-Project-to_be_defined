@@ -37,7 +37,10 @@ class UserController {
 
     if (!result.success) return res.status(400).json(result.object).send();
 
-    const { id, name, surname, email } = await User.create(result.object);
+    const { object } = result;
+    if (object.confirmPassword) delete object.confirmPassword;
+
+    const { id, name, surname, email } = await User.create(object);
 
     return res.json({
       id,

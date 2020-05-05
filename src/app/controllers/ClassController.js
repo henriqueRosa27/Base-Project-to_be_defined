@@ -1,4 +1,5 @@
 import uniqid from 'uniqid';
+import { Op } from 'sequelize';
 
 import Class from '../models/Class';
 import User from '../models/User';
@@ -9,10 +10,17 @@ class ClassController {
   async getAll(req, res) {
     const clas = await Class.findAll({
       attributes: ['id', 'name', 'topic', 'code', 'creation_date'],
+      where: {
+        [Op.or]: [
+          { '$students.id$': req.userId },
+          { '$teacher.id$': req.userId },
+        ],
+      },
       include: [
         {
           model: User,
           as: 'teacher',
+          attributes: ['id', 'name', 'surname'],
         },
         {
           model: User,
@@ -32,6 +40,10 @@ class ClassController {
     const clas = await Class.findOne({
       where: {
         id: req.params.id,
+        [Op.or]: [
+          { '$students.id$': req.userId },
+          { '$teacher.id$': req.userId },
+        ],
       },
       attributes: ['id', 'name', 'topic', 'code', 'creation_date'],
       include: [
