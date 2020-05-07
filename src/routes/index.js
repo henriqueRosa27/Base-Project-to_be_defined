@@ -12,6 +12,8 @@ import uploadImage from '../app/middlewares/uploadImage';
 
 const routes = new Router();
 
+routes.post('/ocr', uploadImage, OCRController.create);
+
 routes.post('/user', UserController.create);
 routes.post('/login', SessionController.login);
 
@@ -48,6 +50,5 @@ routes.put(
   ActivityDeliveryController.sendFeedback
 );
 
-routes.post('/ocr', uploadImage, OCRController.create);
 
 export default routes;
