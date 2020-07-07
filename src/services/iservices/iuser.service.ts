@@ -1,5 +1,5 @@
-import { UserEntity } from 'src/domain/entities';
+import { UserDto } from 'src/application/dto';
 
 export interface IUserService {
-  get(): Promise<UserEntity[]>;
+  get(): Promise<UserDto[]>;
 }

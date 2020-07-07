@@ -1,7 +1,7 @@
 import { Controller, Post, UsePipes, Body, Get, Inject } from '@nestjs/common';
 //import { ValidationPipe } from 'src/application/shared/pipes/validation.pipe';
 import { IUserService } from 'src/services/iservices';
-import { UserEntity } from 'src/domain/entities';
+import { UserDto } from 'src/application/dto';
 
 @Controller('user')
 export class UserController {
@@ -14,7 +14,7 @@ export class UserController {
   // }
 
   @Get()
-  async get(): Promise<UserEntity[]> {
+  async get(): Promise<UserDto[]> {
     return this.service.get();
   }
 }
