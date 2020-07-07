@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import { UserEntity } from '../user/user.entity';
+import { UserEntity } from 'src/domain/entities';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -13,9 +13,9 @@ const config: ConnectionOptions = {
   logging: true,
   logger: 'file',
 
-  migrations: [__dirname + '/../database/migrations/**/*{.ts,.js}'],
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   cli: {
-    migrationsDir: 'src/database/migrations',
+    migrationsDir: 'src/infrastructure/database/migrations',
   },
 };
 
