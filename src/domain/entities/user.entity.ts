@@ -11,14 +11,14 @@ export class UserEntity {
   name: string;
 
   @Column({ name: 'surname' })
-  surname: boolean;
+  surname: string;
 
   @Column({ name: 'email' })
-  email: boolean;
+  email: string;
 
   @Column({ name: 'password', select: false })
   @Exclude()
-  password: boolean;
+  password: string;
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {
