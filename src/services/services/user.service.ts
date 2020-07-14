@@ -15,4 +15,9 @@ export class UserService implements IUserService {
 
     return dto;
   }
+
+  async findByEmail(email: string) : Promise<UserDto> {
+    const user = await this.repository.findByEmail(email);
+    return plainToClass(UserDto, user);
+  }
 }
