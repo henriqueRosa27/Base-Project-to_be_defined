@@ -1,7 +1,7 @@
 import { UserEntity } from '../entities';
 
 export interface IUserRepository {
-  get(): Promise<UserEntity[]>;
+  create(entity: UserEntity): Promise<UserEntity>;
 
   findByEmail(email: string): Promise<UserEntity>;
 }

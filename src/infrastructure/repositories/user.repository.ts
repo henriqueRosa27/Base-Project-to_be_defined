@@ -11,9 +11,9 @@ export class UserRepository implements IUserRepository {
     private repository: Repository<UserEntity>,
   ) {}
 
-  get(): Promise<UserEntity[]> {
-    return this.repository.find();
-  }
+  create(entity: UserEntity): Promise<UserEntity> {
+    return this.repository.save(entity);
+  }  
 
   async findByEmail(email: string): Promise<UserEntity> {
     const qb = await getRepository(UserEntity)

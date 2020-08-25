@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
-import bcrypt from 'bcrypt';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  OneToMany,
+} from 'typeorm';
+import * as argon2 from 'argon2';
 import { Exclude } from 'class-transformer';
+import { ClassEntity } from '.';
 
 @Entity('user')
 export class UserEntity {
@@ -16,12 +23,18 @@ export class UserEntity {
   @Column({ name: 'email' })
   email: string;
 
-  @Column({ name: 'password', select: false })
-  @Exclude()
+  @Column({ name: 'password' })
+  @Exclude({ toPlainOnly: true })
   password: string;
+
+  @OneToMany(
+    type => ClassEntity,
+    classes => classes.teacher,
+  )
+  classes: ClassEntity[];
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {
-    this.password = await bcrypt.hash(this.password, 8);
+    this.password = await argon2.hash(this.password);
   }
 }

@@ -1,3 +1,4 @@
-import { IUserRepository } from './user.repository';
+import { IClassrepository } from './iclass.repository';
+import { IUserRepository } from './iuser.repository';
 
-export { IUserRepository };
+export { IClassrepository, IUserRepository };

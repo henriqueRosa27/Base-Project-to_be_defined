@@ -10,12 +10,7 @@ export class UserController {
 
   @UsePipes(new YupValidationPipe(createUserValidation))
   @Post()
-  create(@Body() createUserDto: CreateUserDto): CreateUserDto {
-    return createUserDto;
-  }
-
-  @Get()
-  async get(): Promise<UserDto[]> {
-    return this.service.get();
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserDto> {
+    return await this.service.create(createUserDto);
   }
 }

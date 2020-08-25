@@ -1,22 +1,23 @@
 import { IUserService } from '../iservices';
-import { Injectable, Inject, Optional } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { IUserRepository } from 'src/domain/irepositories';
-import { UserDto } from 'src/application/dto';
-import { plainToClass } from 'class-transformer';
+import { UserDto, CreateUserDto } from 'src/application/dto';
+import { plainToClass, classToPlain } from 'class-transformer';
+import { UserEntity } from 'src/domain/entities';
 
 @Injectable()
 export class UserService implements IUserService {
-  constructor( @Inject('IUserRepository') private repository: IUserRepository) {}
+  constructor(@Inject('IUserRepository') private repository: IUserRepository) {}
 
-  async get(): Promise<UserDto[]> {
-    const entity = await this.repository.get();
+  async create(user: CreateUserDto): Promise<UserDto> {
+    delete user.confirm_password;
 
-    const dto = plainToClass(UserDto, entity);
-
-    return dto;
+    const entity = plainToClass(UserEntity, classToPlain(user));
+    const saved = await this.repository.create(entity);
+    return plainToClass(UserDto, classToPlain(saved));
   }
 
-  async findByEmail(email: string) : Promise<UserDto> {
+  async findByEmail(email: string): Promise<UserDto> {
     const user = await this.repository.findByEmail(email);
     return plainToClass(UserDto, user);
   }

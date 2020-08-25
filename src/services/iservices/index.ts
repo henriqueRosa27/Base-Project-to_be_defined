@@ -1,3 +1,5 @@
 import { IUserService } from './iuser.service';
+import { IAuthService } from './iauth.service';
+import { IClassService } from './iclass.service';
 
-export { IUserService };
+export { IUserService, IAuthService, IClassService };

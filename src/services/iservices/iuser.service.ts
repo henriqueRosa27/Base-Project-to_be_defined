@@ -1,7 +1,7 @@
-import { UserDto } from 'src/application/dto';
+import { CreateUserDto, UserDto} from 'src/application/dto';
 
 export interface IUserService {
-  get(): Promise<UserDto[]>;
+  create(user: CreateUserDto): Promise<UserDto>;
 
   findByEmail(email: string) : Promise<UserDto>;
 }
