@@ -1,5 +1,5 @@
 const rootDir = process.env.NODE_ENV === 'development' ? 'src' : 'dist';
-console.log(rootDir);
+
 module.exports = {
   name: 'postgres',
   type: 'postgres',
