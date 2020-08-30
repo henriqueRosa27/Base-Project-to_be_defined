@@ -1,6 +1,6 @@
 const rootDir = process.env.NODE_ENV === 'development' ? 'src' : 'dist';
 
-module.exports = {
+export default {
   name: 'postgres',
   type: 'postgres',
   host: process.env.DB_HOST,
