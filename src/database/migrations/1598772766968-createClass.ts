@@ -29,7 +29,7 @@ export default class createClass1598772766968 implements MigrationInterface {
             length: '500',
           },
           {
-            name: 'provider_id',
+            name: 'teacher_id',
             type: 'uuid',
             isNullable: true,
           },

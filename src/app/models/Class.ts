@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import User from './User';
 
 @Entity('class')
 class Class {
@@ -16,6 +19,10 @@ class Class {
 
   @Column()
   topic: string;
+
+  @ManyToOne(() => User, user => user.classes)
+  @JoinColumn({ name: 'teacher_id' })
+  teacher: User;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

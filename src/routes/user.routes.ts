@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 
 import CreateUserService from '../app/services/User/CreateUser';
 import UserRepository from '../app/repositories/implementations/UserRepository';
-import validate from '../middlewares/validation';
+import validationBody from '../middlewares/validationBody';
 import createUserValidation from '../validations/user';
 import User from '../app/models/User';
 
@@ -12,7 +12,7 @@ const userRouter = Router();
 userRouter.post(
   '/',
   (request, response, next) =>
-    validate(request, response, next, createUserValidation),
+    validationBody(request, response, next, createUserValidation),
   async (request, response) => {
     try {
       const createUser = new CreateUserService(
@@ -21,7 +21,12 @@ userRouter.post(
 
       const { name, surname, email, password } = request.body;
 
-      const user = await createUser.execute({ name, surname, email, password });
+      const user = await createUser.execute({
+        name,
+        surname,
+        email: email.toLowerCase(),
+        password,
+      });
 
       delete user.password;
 

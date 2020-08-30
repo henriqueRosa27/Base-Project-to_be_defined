@@ -11,7 +11,19 @@ class ClassRepository implements IClassRepository {
   }
 
   getAll(): Promise<Class[]> {
-    return this.rep.find();
+    return this.rep.find({ relations: ['teacher'] });
+  }
+
+  findById(id: string): Promise<Class | undefined> {
+    return this.rep.findOne(id);
+  }
+
+  create(entity: Class): Promise<Class> {
+    return this.rep.save(entity);
+  }
+
+  update(entity: Class): Promise<Class> {
+    return this.rep.save(entity);
   }
 }
 
