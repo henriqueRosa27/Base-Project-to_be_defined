@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/config/auth.js"],"names":["secret","expiresIn"],"mappings":";;;;;kBAAe;AACbA,UAAQ,kCADK;AAEbC,aAAW;AAFE,C","file":"auth.js","sourcesContent":["export default {\r\n  secret: 'c84d97f6d905be9351e5bdc62db6d693',\r\n  expiresIn: '7d',\r\n};\r\n"]}

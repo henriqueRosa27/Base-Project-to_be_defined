@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/index.js"],"names":["app","listen"],"mappings":";;AAAA;;;;;;AAEAA,cAAIC,MAAJ,CAAW,IAAX","file":"index.js","sourcesContent":["import app from './app';\r\n\r\napp.listen(3333);\r\n"]}
