@@ -15,7 +15,14 @@ class ClassRepository implements IClassRepository {
   }
 
   findById(id: string): Promise<Class | undefined> {
-    return this.rep.findOne(id);
+    return this.rep.findOne(id, { relations: ['teacher', 'students'] });
+  }
+
+  findByCode(code: string): Promise<Class | undefined> {
+    return this.rep.findOne({
+      where: { code },
+      relations: ['teacher', 'students'],
+    });
   }
 
   create(entity: Class): Promise<Class> {

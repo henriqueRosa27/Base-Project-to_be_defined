@@ -6,6 +6,8 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
 } from 'typeorm';
 import User from './User';
 
@@ -20,9 +22,20 @@ class Class {
   @Column()
   topic: string;
 
-  @ManyToOne(() => User, user => user.classes)
+  @Column()
+  code: string;
+
+  @ManyToOne(() => User, teacher => teacher.teaching_classes)
   @JoinColumn({ name: 'teacher_id' })
   teacher: User;
+
+  @ManyToMany(() => User, students => students.student_classes)
+  @JoinTable({
+    name: 'student_class',
+    joinColumn: { name: 'class_id' },
+    inverseJoinColumn: { name: 'student_id' },
+  })
+  students: User[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

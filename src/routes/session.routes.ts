@@ -5,7 +5,7 @@ import AutenticanteUser from '../app/services/Session/AutenticateUser';
 import UserRepository from '../app/repositories/implementations/UserRepository';
 import User from '../app/models/User';
 import validationBody from '../middlewares/validationBody';
-import sessionLoginValidation from '../validations/class';
+import sessionLoginValidation from '../validations/session';
 
 const sessionsRouter = Router();
 

@@ -5,6 +5,8 @@ interface IClassRepository {
 
   findById(id: string): Promise<Class | undefined>;
 
+  findByCode(code: string): Promise<Class | undefined>;
+
   create(entity: Class): Promise<Class>;
 
   update(entity: Class): Promise<Class>;

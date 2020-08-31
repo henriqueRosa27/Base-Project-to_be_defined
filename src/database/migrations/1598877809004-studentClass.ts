@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class createClass1598772766968 implements MigrationInterface {
+export default class studentClass1598877809004 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'class',
+        name: 'student_class',
         columns: [
           {
             name: 'id',
@@ -19,26 +19,12 @@ export default class createClass1598772766968 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
-            type: 'varchar',
-            length: '50',
-            isNullable: false,
+            name: 'class_id',
+            type: 'uuid',
+            isNullable: true,
           },
           {
-            name: 'topic',
-            type: 'varchar',
-            length: '500',
-            isNullable: false,
-          },
-          {
-            name: 'code',
-            type: 'varchar',
-            length: '50',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: 'teacher_id',
+            name: 'student_id',
             type: 'uuid',
             isNullable: true,
           },
@@ -58,9 +44,19 @@ export default class createClass1598772766968 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'class',
+      'student_class',
       new TableForeignKey({
-        columnNames: ['teacher_id'],
+        columnNames: ['class_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'class',
+        onDelete: 'CASCADE',
+      })
+    );
+
+    await queryRunner.createForeignKey(
+      'student_class',
+      new TableForeignKey({
+        columnNames: ['student_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'user',
         onDelete: 'CASCADE',
@@ -69,6 +65,6 @@ export default class createClass1598772766968 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user');
+    await queryRunner.dropTable('student_class');
   }
 }
