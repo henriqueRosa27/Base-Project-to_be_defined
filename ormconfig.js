@@ -4,7 +4,7 @@ const ssl =
     ? {}
     : {
         ssl: {
-          rejectUnauthorized: ssl,
+          rejectUnauthorized: false,
         },
       };
 
@@ -21,5 +21,5 @@ module.exports = {
   cli: {
     migrationsDir: './src/database/migrations',
   },
-  ...ssl,
+  ssl: ssl.ssl,
 };

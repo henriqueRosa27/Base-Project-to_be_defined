@@ -10,6 +10,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import User from './User';
+import Activity from './Activity';
 
 @Entity('class')
 class Class {
@@ -20,7 +21,7 @@ class Class {
   name: string;
 
   @Column()
-  topic: string;
+  description: string;
 
   @Column()
   code: string;
@@ -28,6 +29,9 @@ class Class {
   @ManyToOne(() => User, teacher => teacher.teaching_classes)
   @JoinColumn({ name: 'teacher_id' })
   teacher: User;
+
+  @ManyToMany(() => Activity, activity => activity.team)
+  activities: Activity[];
 
   @ManyToMany(() => User, students => students.student_classes)
   @JoinTable({

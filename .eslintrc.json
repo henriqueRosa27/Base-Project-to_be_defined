@@ -20,6 +20,8 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "no-param-reassign": [2, { "props": false }],
     "@typescript-eslint/no-useless-constructor": ["error"],
     "prettier/prettier": "error",

@@ -21,12 +21,12 @@ export default class studentClass1598877809004 implements MigrationInterface {
           {
             name: 'class_id',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'student_id',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'created_at',

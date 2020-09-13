@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class createClass1598772766968 implements MigrationInterface {
+export default class createActivity1599271002542 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'class',
+        name: 'activity',
         columns: [
           {
             name: 'id',
@@ -31,14 +31,12 @@ export default class createClass1598772766968 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'code',
-            type: 'varchar',
-            length: '50',
-            isNullable: false,
-            isUnique: true,
+            name: 'deadline',
+            type: 'date',
+            isNullable: true,
           },
           {
-            name: 'teacher_id',
+            name: 'class_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -53,22 +51,21 @@ export default class createClass1598772766968 implements MigrationInterface {
             default: 'now()',
           },
         ],
-      }),
-      true
+      })
     );
 
     await queryRunner.createForeignKey(
-      'class',
+      'activity',
       new TableForeignKey({
-        columnNames: ['teacher_id'],
+        columnNames: ['class_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'user',
+        referencedTableName: 'class',
         onDelete: 'CASCADE',
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user');
+    await queryRunner.dropTable('activity');
   }
 }

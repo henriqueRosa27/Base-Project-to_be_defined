@@ -5,7 +5,7 @@ import User from '../../models/User';
 
 interface Request {
   name: string;
-  topic: string;
+  description: string;
   userId: string;
 }
 
@@ -16,13 +16,13 @@ class CreateClass {
     this.rep = rep;
   }
 
-  public async execute({ name, topic, userId }: Request): Promise<Class> {
+  public async execute({ name, description, userId }: Request): Promise<Class> {
     const user = new User();
     user.id = userId;
 
     const entity = new Class();
     entity.name = name;
-    entity.topic = topic;
+    entity.description = description;
     entity.teacher = user;
     entity.code = uniqid.time();
 

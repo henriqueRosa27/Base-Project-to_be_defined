@@ -4,7 +4,7 @@ import AppError from '../../../errors/AppError';
 
 interface Request {
   name: string;
-  topic: string;
+  description: string;
   id: string;
 }
 
@@ -15,14 +15,14 @@ class UpdateClass {
     this.rep = rep;
   }
 
-  public async execute({ name, topic, id }: Request): Promise<Class> {
+  public async execute({ name, description, id }: Request): Promise<Class> {
     const entity = await this.rep.findById(id);
     if (!entity) {
       throw new AppError('Class not found', 404);
     }
 
     entity.name = name;
-    entity.topic = topic;
+    entity.description = description;
     return this.rep.create(entity);
   }
 }
