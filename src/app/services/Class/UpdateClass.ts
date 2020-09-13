@@ -1,4 +1,3 @@
-import e from 'express';
 import Class from '../../models/Class';
 import IClassRepository from '../../repositories/IClassRepository';
 import AppError from '../../../errors/AppError';

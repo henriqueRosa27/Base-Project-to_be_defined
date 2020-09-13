@@ -1,3 +1,4 @@
+import uniqid from 'uniqid';
 import Class from '../../models/Class';
 import IClassRepository from '../../repositories/IClassRepository';
 import User from '../../models/User';
@@ -23,6 +24,7 @@ class CreateClass {
     entity.name = name;
     entity.topic = topic;
     entity.teacher = user;
+    entity.code = uniqid.time();
 
     return this.rep.create(entity);
   }

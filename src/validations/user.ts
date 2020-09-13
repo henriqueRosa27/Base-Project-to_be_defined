@@ -12,7 +12,6 @@ const createUserValidation = Yup.object({
   email: Yup.string()
     .required('Campo obrigatório')
     .email('E-mail inválido')
-
     .max(100),
   password: Yup.string()
     .required('Campo obrigatório')

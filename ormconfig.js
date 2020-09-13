@@ -1,4 +1,12 @@
 const rootDir = process.env.NODE_ENV === 'development' ? 'src' : 'dist';
+const ssl =
+  process.env.NODE_ENV === 'development'
+    ? {}
+    : {
+        ssl: {
+          rejectUnauthorized: ssl,
+        },
+      };
 
 module.exports = {
   name: 'postgres',
@@ -13,7 +21,5 @@ module.exports = {
   cli: {
     migrationsDir: './src/database/migrations',
   },
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ...ssl,
 };

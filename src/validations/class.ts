@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const createClassValidation = Yup.object({
+const createClassValidation = Yup.object({
   name: Yup.string()
     .required('Campo obrigatório')
     .min(3, 'Minimo de 3 caracteres')

@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToMany,
 } from 'typeorm';
 import Class from './Class';
 
@@ -25,8 +26,11 @@ class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Class, cls => cls.teacher)
-  classes: Class[];
+  @OneToMany(() => Class, teaching_classes => teaching_classes.teacher)
+  teaching_classes: Class[];
+
+  @ManyToMany(() => Class, student_classes => student_classes.students)
+  student_classes: Class[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
