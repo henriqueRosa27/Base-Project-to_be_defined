@@ -4,14 +4,15 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
   OneToMany,
-  ManyToMany,
 } from 'typeorm';
 import Class from './Class';
 import ActivityDelivery from './ActivityDelivery';
 
-@Entity('user')
-class User {
+@Entity('activity')
+class Activity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,25 +20,20 @@ class User {
   name: string;
 
   @Column()
-  surname: string;
+  description: string;
 
   @Column()
-  email: string;
+  deadline: Date;
 
-  @Column()
-  password: string;
-
-  @OneToMany(() => Class, teaching_classes => teaching_classes.teacher)
-  teaching_classes: Class[];
+  @ManyToOne(() => Class, cls => cls.activities)
+  @JoinColumn({ name: 'class_id' })
+  team: Class;
 
   @OneToMany(
     () => ActivityDelivery,
-    deliveredActivities => deliveredActivities.student
+    deliveredActivities => deliveredActivities.activity
   )
-  deliveredActivities: ActivityDelivery[];
-
-  @ManyToMany(() => Class, student_classes => student_classes.students)
-  student_classes: Class[];
+  deliveredActivities: Class;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -46,4 +42,4 @@ class User {
   updatedAt: Date;
 }
 
-export default User;
+export default Activity;

@@ -33,10 +33,10 @@ classesRouter.post(
       new ClassRepository(getRepository(Class, 'postgres'))
     );
 
-    const { name, topic } = request.body;
+    const { name, description } = request.body;
     const userId = request.user.id;
 
-    const classes = await createClass.execute({ name, topic, userId });
+    const classes = await createClass.execute({ name, description, userId });
 
     return response.json(classes);
   }
@@ -54,10 +54,10 @@ classesRouter.put(
       new ClassRepository(getRepository(Class, 'postgres'))
     );
 
-    const { name, topic } = request.body;
+    const { name, description } = request.body;
     const { id } = request.params;
 
-    const classes = await updateClass.execute({ name, topic, id });
+    const classes = await updateClass.execute({ name, description, id });
 
     return response.json(classes);
   }

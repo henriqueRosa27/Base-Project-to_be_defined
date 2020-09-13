@@ -14,26 +14,22 @@ userRouter.post(
   (request, response, next) =>
     validationBody(request, response, next, createUserValidation),
   async (request, response) => {
-    try {
-      const createUser = new CreateUserService(
-        new UserRepository(getRepository(User, 'postgres'))
-      );
+    const createUser = new CreateUserService(
+      new UserRepository(getRepository(User, 'postgres'))
+    );
 
-      const { name, surname, email, password } = request.body;
+    const { name, surname, email, password } = request.body;
 
-      const user = await createUser.execute({
-        name,
-        surname,
-        email: email.toLowerCase(),
-        password,
-      });
+    const user = await createUser.execute({
+      name,
+      surname,
+      email: email.toLowerCase(),
+      password,
+    });
 
-      delete user.password;
+    delete user.password;
 
-      return response.json(user);
-    } catch (err) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json(user);
   }
 );
 
