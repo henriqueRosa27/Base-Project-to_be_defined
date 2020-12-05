@@ -22,7 +22,7 @@ class LinkByCode {
   }
 
   public async execute({ email, idClass }: Request): Promise<Response> {
-    const entityClass = await this.repClass.findById(idClass);
+    const entityClass = await this.repClass.findByIdIncludeStudents(idClass);
 
     if (!entityClass) {
       throw new AppError('Class not found', 404);

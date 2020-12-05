@@ -15,6 +15,10 @@ class ClassRepository implements IClassRepository {
   }
 
   findById(id: string): Promise<Class | undefined> {
+    return this.rep.findOne(id, { relations: ['teacher'] });
+  }
+
+  findByIdIncludeStudents(id: string): Promise<Class | undefined> {
     return this.rep.findOne(id, { relations: ['teacher', 'students'] });
   }
 

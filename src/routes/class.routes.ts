@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import GetAllClass from '../app/services/Class/GetAllClass';
 import CreateClass from '../app/services/Class/CreateClass';
 import UpdateClass from '../app/services/Class/UpdateClass';
+import GetByIdClass from '../app/services/Class/GetByIdClass';
 import ClassRepository from '../app/repositories/implementations/ClassRepository';
 import Class from '../app/models/Class';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
@@ -19,6 +20,18 @@ classesRouter.get('/', ensureAuthenticated, async (request, response) => {
   );
 
   const classes = await getAllClass.execute();
+
+  return response.json(classes);
+});
+
+classesRouter.get('/:id', ensureAuthenticated, async (request, response) => {
+  const getByIdClass = new GetByIdClass(
+    new ClassRepository(getRepository(Class, 'postgres'))
+  );
+
+  const { id } = request.params;
+
+  const classes = await getByIdClass.execute(id);
 
   return response.json(classes);
 });
