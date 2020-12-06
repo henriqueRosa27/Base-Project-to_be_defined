@@ -15,6 +15,7 @@ import {
   sendFeedbackValidation,
 } from '../validations/activityDelivery';
 import SendFeedbackActivitydelivery from '../app/services/ActivityDelivery/SendFeedback';
+import GetByUserActivityDelivery from '../app/services/ActivityDelivery/GetByUserActivityDelivery';
 import uploadConfig from '../config/multer';
 
 const activitiesDeliveryRouter = Router();
@@ -35,6 +36,30 @@ activitiesDeliveryRouter.get(
     const { id } = request.params;
 
     const activitiesdelivery = await getAllClass.execute({ idActivity: id });
+
+    return response.json(activitiesdelivery);
+  }
+);
+
+activitiesDeliveryRouter.get(
+  '/:id/by-activity-user',
+  ensureAuthenticated,
+  (request, response, next) =>
+    validationParam(request, response, next, idParamValidation),
+  async (request, response) => {
+    const getAllClass = new GetByUserActivityDelivery(
+      new ActivityDeliveryRepository(
+        getRepository(ActivityDelivery, 'postgres')
+      )
+    );
+
+    const { id } = request.params;
+    const { id: userId } = request.user;
+
+    const activitiesdelivery = await getAllClass.execute({
+      idActivity: id,
+      userId,
+    });
 
     return response.json(activitiesdelivery);
   }

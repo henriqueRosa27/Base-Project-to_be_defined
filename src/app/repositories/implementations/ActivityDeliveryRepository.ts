@@ -13,15 +13,25 @@ class Activityrepository implements IActivityDeliveryRepository {
   getAll(idClass: string): Promise<ActivityDelivery[]> {
     return this.rep.find({
       where: {
-        activity: {
-          id: idClass,
-        },
+        activityId: idClass,
       },
     });
   }
 
   findById(id: string): Promise<ActivityDelivery | undefined> {
     return this.rep.findOne(id);
+  }
+
+  findByUserIdAndActivityId(
+    activityId: string,
+    idUser: string
+  ): Promise<ActivityDelivery | undefined> {
+    return this.rep.findOne({
+      where: {
+        activityId,
+        studentId: idUser,
+      },
+    });
   }
 
   create(entity: ActivityDelivery): Promise<ActivityDelivery> {

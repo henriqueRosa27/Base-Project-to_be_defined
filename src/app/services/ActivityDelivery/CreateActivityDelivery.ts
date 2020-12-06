@@ -25,19 +25,14 @@ class CreateActivityDelivery {
     id_activity,
     id_user,
   }: Request): Promise<ActivityDelivery> {
-    const activity = new Activity();
-    activity.id = id_activity;
-
-    const user = new User();
-    user.id = id_user;
-
+    console.log(id_activity);
     const activityDelivery = new ActivityDelivery();
     activityDelivery.note = note;
     activityDelivery.deliveryDate = new Date();
     activityDelivery.report = report;
     activityDelivery.image = file;
-    activityDelivery.activity = activity;
-    activityDelivery.student = user;
+    activityDelivery.activityId = id_activity;
+    activityDelivery.studentId = id_user;
 
     const activitySaved = await this.rep.create(activityDelivery);
 

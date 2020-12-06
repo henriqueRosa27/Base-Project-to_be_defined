@@ -30,6 +30,12 @@ class ActivityDelivery {
   @Column()
   image: string;
 
+  @Column({ name: 'activity_id', select: false })
+  activityId: string;
+
+  @Column({ name: 'student_id', select: false })
+  studentId: string;
+
   @ManyToOne(() => Activity, activity => activity.deliveredActivities)
   @JoinColumn({ name: 'activity_id' })
   activity: Activity;
