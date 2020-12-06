@@ -8,8 +8,8 @@ class GetAllClass {
     this.rep = rep;
   }
 
-  public async execute(): Promise<Class[]> {
-    const classes = await this.rep.getAll();
+  public async execute(idUser: string): Promise<Class[]> {
+    const classes = await this.rep.getAll(idUser);
     return classes.map(data => {
       delete data.teacher.password;
       return data;
