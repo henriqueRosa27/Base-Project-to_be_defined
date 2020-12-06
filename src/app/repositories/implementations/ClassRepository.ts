@@ -13,8 +13,9 @@ class ClassRepository implements IClassRepository {
   getAll(idUser: string): Promise<Class[]> {
     return this.rep
       .createQueryBuilder('class')
-      .leftJoin('class.students', 'student', 'student.id = class.id')
-      .where('student.id = :id', { id: idUser })
+      .leftJoin('student_class', 'std', 'std.class_id = class.id')
+      .leftJoinAndSelect('class.teacher', 'teacher')
+      .where('std.student_id = :id', { id: idUser })
       .orWhere('class.teacher_id = :id', { id: idUser })
       .getMany();
   }
