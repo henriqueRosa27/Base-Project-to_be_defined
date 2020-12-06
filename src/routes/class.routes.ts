@@ -19,7 +19,9 @@ classesRouter.get('/', ensureAuthenticated, async (request, response) => {
     new ClassRepository(getRepository(Class, 'postgres'))
   );
 
-  const classes = await getAllClass.execute();
+  const { id } = request.user;
+
+  const classes = await getAllClass.execute(id);
 
   return response.json(classes);
 });
