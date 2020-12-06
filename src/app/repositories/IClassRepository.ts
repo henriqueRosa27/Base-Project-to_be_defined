@@ -1,7 +1,7 @@
 import Class from '../models/Class';
 
 interface IClassRepository {
-  getAll(): Promise<Class[]>;
+  getAll(idUser: string): Promise<Class[]>;
 
   findById(id: string): Promise<Class | undefined>;
 

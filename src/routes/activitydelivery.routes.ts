@@ -21,7 +21,7 @@ const activitiesDeliveryRouter = Router();
 const upload = multer(uploadConfig);
 
 activitiesDeliveryRouter.get(
-  '/:id/by-class',
+  '/:id/by-activity',
   ensureAuthenticated,
   (request, response, next) =>
     validationParam(request, response, next, idParamValidation),

@@ -26,6 +26,9 @@ class Class {
   @Column()
   code: string;
 
+  @Column({ name: 'teacher_id', select: false })
+  teacherId: string;
+
   @ManyToOne(() => User, teacher => teacher.teaching_classes)
   @JoinColumn({ name: 'teacher_id' })
   teacher: User;

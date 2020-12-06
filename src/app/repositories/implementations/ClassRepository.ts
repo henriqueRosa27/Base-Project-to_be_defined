@@ -10,8 +10,11 @@ class ClassRepository implements IClassRepository {
     this.rep = rep;
   }
 
-  getAll(): Promise<Class[]> {
-    return this.rep.find({ relations: ['teacher'] });
+  getAll(idUser: string): Promise<Class[]> {
+    return this.rep.find({
+      where: { teacherId: idUser },
+      relations: ['teacher'],
+    });
   }
 
   findById(id: string): Promise<Class | undefined> {
