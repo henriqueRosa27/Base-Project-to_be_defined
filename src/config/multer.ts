@@ -13,7 +13,7 @@ const tmpFolder = path.resolve(
 
 export default {
   directory: tmpFolder,
-
+  limits: { fieldSize: 25 * 1024 * 1024 },
   storage: multer.diskStorage({
     destination: tmpFolder,
     filename(request, file, cb) {
