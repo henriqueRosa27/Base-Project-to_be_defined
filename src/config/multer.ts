@@ -16,14 +16,14 @@ export default {
   limits: { fieldSize: 25 * 1024 * 1024 },
   storage: multer.diskStorage({
     destination: tmpFolder,
-    filename(request, file, cb) {
+    filename(_request, file, cb) {
       const fileHash = crypto.randomBytes(10).toString('hex');
       const fileName = `${fileHash}-${file.originalname}`;
 
       return cb(null, fileName);
     },
   }),
-  fileFilter: (request: any, file: Express.Multer.File, cb: any) => {
+  fileFilter: (_request: any, file: Express.Multer.File, cb: any) => {
     if (
       file.mimetype === 'image/png' ||
       file.mimetype === 'image/jpg' ||

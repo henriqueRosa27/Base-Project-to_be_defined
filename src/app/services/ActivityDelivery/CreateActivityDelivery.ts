@@ -1,7 +1,5 @@
 import IActivityDeliveryRepository from '../../repositories/IActivityDeliveryRepository';
 import ActivityDelivery from '../../models/ActivityDelivery';
-import Activity from '../../models/Activity';
-import User from '../../models/User';
 
 interface Request {
   note: string;
