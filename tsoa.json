@@ -1,0 +1,10 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/app/api/controllers/**/*Controller.ts"],
+  "routes": {
+    "routesDir": "build",
+    "iocModule": "src/config/ioc"
+  },
+  "ignore": ["**/node_modules/**"]
+}

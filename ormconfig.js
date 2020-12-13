@@ -1,6 +1,6 @@
 const rootDir = process.env.NODE_ENV === 'development' ? 'src' : 'dist';
 const ssl =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV !== 'development'
     ? {}
     : {
         ssl: {

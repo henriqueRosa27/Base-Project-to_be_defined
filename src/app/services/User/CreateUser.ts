@@ -1,22 +1,16 @@
 import { hash } from 'bcryptjs';
+import { provide } from 'inversify-binding-decorators';
+import { inject } from 'inversify';
 
 import IUserRepository from '../../repositories/IUserRepository';
 import User from '../../models/User';
 import AppError from '../../../errors/AppError';
+import { CreateUser as Request } from '../../api/dto/User';
 
-interface Request {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-}
-
+// eslint-disable-next-line no-use-before-define
+@provide(CreateUserService)
 class CreateUserService {
-  private rep: IUserRepository;
-
-  constructor(rep: IUserRepository) {
-    this.rep = rep;
-  }
+  @inject('IUserRepository') private readonly rep: IUserRepository;
 
   public async execute({
     name,

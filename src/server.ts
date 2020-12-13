@@ -1,10 +1,11 @@
 import 'reflect-metadata';
-import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { urlencoded, json } from 'body-parser';
 
+import { RegisterRoutes } from '../build/routes';
 import AppError from './errors/AppError';
-import routes from './routes/index';
 import uploadConfig from './config/multer';
 
 import 'dotenv/config';
@@ -12,11 +13,19 @@ import './database';
 
 const app = express();
 
-app.use('/files', express.static(uploadConfig.directory));
-
 app.use(cors());
 
-app.use(routes);
+app.use(
+  urlencoded({
+    extended: true,
+  })
+);
+
+app.use(json());
+
+RegisterRoutes(app);
+
+app.use('/files', express.static(uploadConfig.directory));
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
