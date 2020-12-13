@@ -9,7 +9,7 @@ const ssl =
       };
 
 module.exports = {
-  name: 'postgres',
+  name: 'default',
   type: 'postgres',
   host: process.env.DB_HOST,
   port: 5432,
