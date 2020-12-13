@@ -7,7 +7,6 @@ import User from '../../models/User';
 import AppError from '../../../errors/AppError';
 import { CreateUser as Request } from '../../api/dto/User';
 
-// eslint-disable-next-line no-use-before-define
 @provide(CreateUserService)
 class CreateUserService {
   @inject('IUserRepository') private readonly rep: IUserRepository;

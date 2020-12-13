@@ -1,5 +1,7 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { provide } from 'inversify-binding-decorators';
+import { inject } from 'inversify';
 
 import IUserRepository from '../../repositories/IUserRepository';
 import AppError from '../../../errors/AppError';
@@ -16,12 +18,9 @@ interface Response {
   token: string;
 }
 
+@provide(AutenticanteUser)
 class AutenticanteUser {
-  private rep: IUserRepository;
-
-  constructor(rep: IUserRepository) {
-    this.rep = rep;
-  }
+  @inject('IUserRepository') private readonly rep: IUserRepository;
 
   public async execute({ email, password }: Request): Promise<Response> {
     const user = await this.rep.findByEmail(email);
