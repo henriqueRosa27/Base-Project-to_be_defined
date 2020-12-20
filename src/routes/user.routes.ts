@@ -20,16 +20,14 @@ userRouter.post(
 
     const { name, surname, email, password } = request.body;
 
-    const user = await createUser.execute({
+    const data = await createUser.execute({
       name,
       surname,
       email: email.toLowerCase(),
       password,
     });
 
-    delete user.password;
-
-    return response.json(user);
+    return response.json(data);
   }
 );
 

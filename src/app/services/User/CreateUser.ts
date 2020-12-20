@@ -1,8 +1,10 @@
 import { hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import IUserRepository from '../../repositories/IUserRepository';
 import User from '../../models/User';
 import AppError from '../../../errors/AppError';
+import AuthConfig from '../../../config/auth';
 
 interface Request {
   name: string;
@@ -11,6 +13,10 @@ interface Request {
   password: string;
 }
 
+interface Response {
+  user: User;
+  token: string;
+}
 class CreateUserService {
   private rep: IUserRepository;
 
@@ -23,7 +29,7 @@ class CreateUserService {
     surname,
     email,
     password,
-  }: Request): Promise<User> {
+  }: Request): Promise<Response> {
     const emailResult = await this.rep.findByEmail(email);
     if (emailResult) {
       throw new AppError('Email address already used', 400);
@@ -31,13 +37,24 @@ class CreateUserService {
 
     const hashedPassword = await hash(password, 8);
 
-    const user = new User();
-    user.name = name;
-    user.surname = surname;
-    user.email = email;
-    user.password = hashedPassword;
+    const entity = new User();
+    entity.name = name;
+    entity.surname = surname;
+    entity.email = email;
+    entity.password = hashedPassword;
 
-    return this.rep.create(user);
+    const user = await this.rep.create(entity);
+    delete user.password;
+
+    const { secret, expiresIn } = AuthConfig.jwt;
+    const token = sign({}, secret, {
+      subject: user.id,
+      expiresIn,
+    });
+
+    const response = { user, token };
+
+    return response;
   }
 }
 
