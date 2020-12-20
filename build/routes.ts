@@ -6,6 +6,7 @@ import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, H
 import { LoginController } from './../src/app/api/controllers/SessionController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../src/app/api/controllers/UserController';
+import { expressAuthentication } from './../src/middlewares/ensureAuthenticated';
 import { iocContainer } from './../src/config/ioc';
 import { IocContainer, IocContainerFactory } from '@tsoa/runtime';
 import * as express from 'express';
@@ -93,7 +94,7 @@ export function RegisterRoutes(app: express.Router) {
             }
 
 
-            const promise = controller.CreateUser.apply(controller, validatedArgs as any);
+            const promise = controller.getUser.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

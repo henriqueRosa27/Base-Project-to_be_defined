@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from 'express';
+import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
 import AuthConfig from '../config/auth';
 import AppError from '../errors/AppError';
@@ -9,11 +9,11 @@ interface TokenPayload {
   sub: string;
 }
 
-function ensureAuthenticated(
+export function expressAuthentication(
   request: Request,
-  _response: Response,
-  next: NextFunction
-): void {
+  _securityName: string,
+  _scopes?: string[]
+): Promise<any> {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -27,14 +27,8 @@ function ensureAuthenticated(
 
     const { sub } = decoded as TokenPayload;
 
-    request.user = {
-      id: sub,
-    };
-
-    return next();
+    return Promise.resolve({ id: sub });
   } catch {
     throw new AppError('Invalid JWT Token', 401);
   }
 }
-
-export default ensureAuthenticated;

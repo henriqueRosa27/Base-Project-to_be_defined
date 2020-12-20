@@ -1,25 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
 import { ObjectSchema, ValidationError } from 'yup';
+import AppError from '../errors/AppError';
 
-const validate = async (
-  request: Request,
-  response: Response,
-  next: NextFunction,
-  schema: ObjectSchema
-): Promise<void> => {
+const validate = async (data: any, schema: ObjectSchema): Promise<void> => {
   try {
-    await schema.validate(request.body, {
+    await schema.validate(data, {
       abortEarly: false,
     });
-
-    next();
   } catch (error) {
     const array = error.inner.map((err: ValidationError) => ({
       message: err.errors[0],
       label: err.path,
       type: err.type,
     }));
-    response.status(400).json({ status: 'error', message: array });
+
+    const errors = { status: 'error', message: array };
+    throw new AppError(errors, 400);
   }
 };
 

@@ -1,9 +1,9 @@
 class Error {
-  public readonly message: string;
+  public readonly message: string | Record<string, unknown>;
 
   public readonly statusCode: number;
 
-  constructor(message: string, statusCode = 400) {
+  constructor(message: string | Record<string, unknown>, statusCode = 400) {
     this.message = message;
     this.statusCode = statusCode;
   }

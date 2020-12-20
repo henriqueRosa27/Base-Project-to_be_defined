@@ -1,4 +1,4 @@
-import { Route, Controller, Post, Body } from 'tsoa';
+import { Route, Controller, Body, Post } from 'tsoa';
 import { provide } from 'inversify-binding-decorators';
 import { inject } from 'inversify';
 import { CreateUser } from '../dto/User';
@@ -11,7 +11,7 @@ export class UserController extends Controller {
   private readonly _createUserService: CreateUserService;
 
   @Post()
-  public async CreateUser(@Body() body: CreateUser): Promise<any> {
+  public async getUser(@Body() body: CreateUser): Promise<any> {
     return this._createUserService.execute(body);
   }
 }
