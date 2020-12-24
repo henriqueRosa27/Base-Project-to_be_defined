@@ -1,6 +1,5 @@
 import { hash } from 'bcryptjs';
 import { provide } from 'inversify-binding-decorators';
-import { inject } from 'inversify';
 
 import IUserRepository from '../../repositories/IUserRepository';
 import User from '../../models/User';
@@ -11,7 +10,11 @@ import schema from '../../../validations/user';
 
 @provide(CreateUserService)
 class CreateUserService {
-  @inject('IUserRepository') private readonly rep: IUserRepository;
+  private rep: IUserRepository;
+
+  constructor(rep: IUserRepository) {
+    this.rep = rep;
+  }
 
   public async execute({
     name,

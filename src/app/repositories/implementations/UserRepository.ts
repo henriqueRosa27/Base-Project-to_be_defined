@@ -8,8 +8,8 @@ import User from '../../models/User';
 class UserRepository implements IUserRepository {
   private rep: Repository<User>;
 
-  constructor() {
-    this.rep = getRepository(User);
+  constructor(rep: Repository<User>) {
+    this.rep = rep;
   }
 
   create(user: User): Promise<User> {

@@ -27,21 +27,34 @@ RegisterRoutes(app);
 
 app.use('/files', express.static(uploadConfig.directory));
 
-app.use(
-  (err: Error, _request: Request, response: Response, _: NextFunction) => {
-    if (err instanceof AppError) {
-      return response.status(err.statusCode).json({
-        status: 'error',
-        message: err.message,
-      });
-    }
-    console.log(err);
-    return response.status(500).json({
+app.use(function notFoundHandler(_req, res: ExResponse) {
+  res.status(404).send({
+    message: 'Not Found',
+  });
+});
+
+app.use(function errorHandler(
+  err: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response | void {
+  if (err instanceof AppError) {
+    console.warn(`Caught Validation Error for ${req.path}:`, err.message);
+    return res.status(err.statusCode).json({
       status: 'error',
-      message: 'Erro inesperado',
+      message: err.message,
     });
   }
-);
+  if (err instanceof Error) {
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      err: err.message,
+    });
+  }
+
+  next();
+});
 
 app.listen(process.env.PORT || 3333, () => {
   console.log('Server started!');
