@@ -1,6 +1,6 @@
 import IClassRepository from '../../repositories/IClassRepository';
 import Class from '../../models/Class';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 
 class GetByIdClass {
   private rep: IClassRepository;

@@ -1,6 +1,6 @@
 import IActivityDeliveryRepository from '../../repositories/IActivityDeliveryRepository';
 import ActivityDelivery from '../../models/ActivityDelivery';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 
 interface Request {
   feedback: string;

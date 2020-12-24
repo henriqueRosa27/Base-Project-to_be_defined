@@ -1,6 +1,6 @@
 import IActivityRepository from '../../repositories/IActivityRepository';
 import Activity from '../../models/Activity';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 
 interface Request {
   name: string;

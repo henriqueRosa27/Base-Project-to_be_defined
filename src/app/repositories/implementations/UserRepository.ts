@@ -1,4 +1,4 @@
-import { Repository, EntityRepository, getRepository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { injectable } from 'inversify';
 import IUserRepository from '../IUserRepository';
 import User from '../../models/User';

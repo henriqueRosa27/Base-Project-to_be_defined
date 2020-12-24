@@ -1,5 +1,5 @@
 import { ObjectSchema, ValidationError } from 'yup';
-import AppError from '../errors/AppError';
+import AppError from '../app/application/errors/AppError';
 
 const validate = async (data: any, schema: ObjectSchema): Promise<void> => {
   try {

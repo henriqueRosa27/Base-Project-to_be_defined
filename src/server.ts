@@ -5,7 +5,7 @@ import cors from 'cors';
 import { urlencoded, json } from 'body-parser';
 
 import { RegisterRoutes } from '../build/routes';
-import AppError from './errors/AppError';
+import AppError from './app/application/errors/AppError';
 import uploadConfig from './config/multer';
 
 import 'dotenv/config';
@@ -27,7 +27,7 @@ RegisterRoutes(app);
 
 app.use('/files', express.static(uploadConfig.directory));
 
-app.use(function notFoundHandler(_req, res: ExResponse) {
+app.use(function notFoundHandler(_req, res: Response) {
   res.status(404).send({
     message: 'Not Found',
   });

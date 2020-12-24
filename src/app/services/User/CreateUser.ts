@@ -3,7 +3,7 @@ import { provide } from 'inversify-binding-decorators';
 
 import IUserRepository from '../../repositories/IUserRepository';
 import User from '../../models/User';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 import { CreateUser as Request } from '../../api/dto/User';
 import validate from '../../../middlewares/validationBody';
 import schema from '../../../validations/user';

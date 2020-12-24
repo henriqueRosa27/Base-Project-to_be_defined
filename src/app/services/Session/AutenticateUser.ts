@@ -4,7 +4,7 @@ import { provide } from 'inversify-binding-decorators';
 import { inject } from 'inversify';
 
 import IUserRepository from '../../repositories/IUserRepository';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 import AuthConfig from '../../../config/auth';
 import User from '../../models/User';
 
@@ -20,7 +20,11 @@ interface Response {
 
 @provide(AutenticanteUser)
 class AutenticanteUser {
-  @inject('IUserRepository') private readonly rep: IUserRepository;
+  private rep: IUserRepository;
+
+  constructor(rep: IUserRepository) {
+    this.rep = rep;
+  }
 
   public async execute({ email, password }: Request): Promise<Response> {
     const user = await this.rep.findByEmail(email);

@@ -1,7 +1,7 @@
 import path from 'path';
 import crypto from 'crypto';
 import multer from 'multer';
-import AppError from '../errors/AppError';
+import AppError from '../app/application/errors/AppError';
 
 const tmpFolder = path.resolve(
   __dirname,

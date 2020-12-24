@@ -1,13 +1,15 @@
 import { Route, Controller, Post, Body } from 'tsoa';
 import { provide } from 'inversify-binding-decorators';
 import { inject } from 'inversify';
+
+import { SERVICE_TYPES as TYPES } from '../../ioc/types';
 import { Login } from '../dto/Session';
 import AutenticateUser from '../../services/Session/AutenticateUser';
 
 @provide(LoginController)
 @Route('session')
 export class LoginController extends Controller {
-  @inject(AutenticateUser)
+  @inject(TYPES.sessionLogin)
   private readonly _autenticateUser: AutenticateUser;
 
   @Post('login')

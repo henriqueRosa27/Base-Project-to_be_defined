@@ -4,7 +4,7 @@
   "controllerPathGlobs": ["src/app/api/controllers/**/*Controller.ts"],
   "routes": {
     "routesDir": "build",
-    "iocModule": "src/config/ioc",
+    "iocModule": "src/app/ioc",
     "authenticationModule": "./src/middlewares/ensureAuthenticated.ts"
   },
   "ignore": ["**/node_modules/**"]

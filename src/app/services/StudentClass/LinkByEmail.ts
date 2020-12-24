@@ -1,6 +1,6 @@
 import IClassRepository from '../../repositories/IClassRepository';
 import IUserRepository from '../../repositories/IUserRepository';
-import AppError from '../../../errors/AppError';
+import AppError from '../../application/errors/AppError';
 
 interface Request {
   email: string;
