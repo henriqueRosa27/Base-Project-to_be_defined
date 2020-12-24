@@ -1,6 +1,6 @@
-import IActivityRepository from '../../repositories/IActivityRepository';
-import Activity from '../../models/Activity';
-import Class from '../../models/Class';
+import IActivityRepository from "../../infra/repositories/IActivityRepository";
+import Activity from "../../domain/models/Activity";
+import Class from "../../domain/models/Class";
 
 interface Request {
   name: string;

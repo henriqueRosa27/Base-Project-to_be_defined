@@ -1,7 +1,10 @@
-import { ObjectSchema, ValidationError } from 'yup';
-import AppError from '../app/application/errors/AppError';
+import { ObjectSchema, ValidationError } from "yup";
+import AppError from "../app/application/errors/AppError";
 
-const validate = async (data: any, schema: ObjectSchema): Promise<void> => {
+const validate = async (
+  data: Record<string, unknown>,
+  schema: ObjectSchema,
+): Promise<void> => {
   try {
     await schema.validate(data, {
       abortEarly: false,
@@ -13,7 +16,7 @@ const validate = async (data: any, schema: ObjectSchema): Promise<void> => {
       type: err.type,
     }));
 
-    const errors = { status: 'error', message: array };
+    const errors = { status: "error", message: array };
     throw new AppError(errors, 400);
   }
 };

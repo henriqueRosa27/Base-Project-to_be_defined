@@ -1,4 +1,4 @@
-import Class from '../models/Class';
+import Class from "../../domain/models/Class";
 
 interface IClassRepository {
   getAll(idUser: string): Promise<Class[]>;

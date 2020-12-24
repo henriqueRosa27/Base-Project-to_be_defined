@@ -1,12 +1,12 @@
-import { hash } from 'bcryptjs';
-import { provide } from 'inversify-binding-decorators';
+import { hash } from "bcryptjs";
+import { provide } from "inversify-binding-decorators";
 
-import IUserRepository from '../../repositories/IUserRepository';
-import User from '../../models/User';
-import AppError from '../../application/errors/AppError';
-import { CreateUser as Request } from '../../api/dto/User';
-import validate from '../../../middlewares/validationBody';
-import schema from '../../../validations/user';
+import IUserRepository from "../../infra/repositories/IUserRepository";
+import User from "../../domain/models/User";
+import AppError from "../../application/errors/AppError";
+import { CreateUser as Request } from "../../application/dto/User";
+import validate from "../../../middlewares/validationBody";
+import schema from "../../application/validations/user";
 
 @provide(CreateUserService)
 class CreateUserService {
@@ -29,12 +29,12 @@ class CreateUserService {
         email,
         password,
       },
-      schema
+      schema,
     );
 
     const emailResult = await this.rep.findByEmail(email);
     if (emailResult) {
-      throw new AppError('Email address already used', 400);
+      throw new AppError("Email address already used", 400);
     }
 
     const hashedPassword = await hash(password, 8);

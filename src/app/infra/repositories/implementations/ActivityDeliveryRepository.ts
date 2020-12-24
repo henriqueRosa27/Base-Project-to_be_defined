@@ -1,6 +1,6 @@
-import { EntityRepository, Repository } from 'typeorm';
-import IActivityDeliveryRepository from '../IActivityDeliveryRepository';
-import ActivityDelivery from '../../models/ActivityDelivery';
+import { EntityRepository, Repository } from "typeorm";
+import IActivityDeliveryRepository from "../IActivityDeliveryRepository";
+import ActivityDelivery from "../../../domain/models/ActivityDelivery";
 
 @EntityRepository(ActivityDelivery)
 class Activityrepository implements IActivityDeliveryRepository {
@@ -24,7 +24,7 @@ class Activityrepository implements IActivityDeliveryRepository {
 
   findByUserIdAndActivityId(
     activityId: string,
-    idUser: string
+    idUser: string,
   ): Promise<ActivityDelivery | undefined> {
     return this.rep.findOne({
       where: {

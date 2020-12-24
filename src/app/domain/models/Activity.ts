@@ -7,13 +7,13 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
-} from 'typeorm';
-import Class from './Class';
-import ActivityDelivery from './ActivityDelivery';
+} from "typeorm";
+import Class from "./Class";
+import ActivityDelivery from "./ActivityDelivery";
 
-@Entity('activity')
+@Entity("activity")
 class Activity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -25,20 +25,20 @@ class Activity {
   @Column()
   deadline: Date;
 
-  @ManyToOne(() => Class, cls => cls.activities)
-  @JoinColumn({ name: 'class_id' })
+  @ManyToOne(() => Class, (cls) => cls.activities)
+  @JoinColumn({ name: "class_id" })
   team: Class;
 
   @OneToMany(
     () => ActivityDelivery,
-    deliveredActivities => deliveredActivities.activity
+    (deliveredActivities) => deliveredActivities.activity,
   )
   deliveredActivities: Class;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 }
 

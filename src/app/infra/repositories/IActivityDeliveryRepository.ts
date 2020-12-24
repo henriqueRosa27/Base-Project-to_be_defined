@@ -1,4 +1,4 @@
-import ActivityDelivery from '../models/ActivityDelivery';
+import ActivityDelivery from "../../domain/models/ActivityDelivery";
 
 interface IActivityDeliveryRepository {
   getAll(idActivity: string): Promise<ActivityDelivery[]>;
@@ -7,7 +7,7 @@ interface IActivityDeliveryRepository {
 
   findByUserIdAndActivityId(
     idActivity: string,
-    idUser: string
+    idUser: string,
   ): Promise<ActivityDelivery | undefined>;
 
   create(entity: ActivityDelivery): Promise<ActivityDelivery>;

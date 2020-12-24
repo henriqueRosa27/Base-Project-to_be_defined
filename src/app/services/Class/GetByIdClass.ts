@@ -1,6 +1,6 @@
-import IClassRepository from '../../repositories/IClassRepository';
-import Class from '../../models/Class';
-import AppError from '../../application/errors/AppError';
+import IClassRepository from "../../infra/repositories/IClassRepository";
+import Class from "../../domain/models/Class";
+import AppError from "../../application/errors/AppError";
 
 class GetByIdClass {
   private rep: IClassRepository;
@@ -15,7 +15,7 @@ class GetByIdClass {
       delete data?.teacher.password;
       return data;
     }
-    throw new AppError('Class not found', 404);
+    throw new AppError("Class not found", 404);
   }
 }
 

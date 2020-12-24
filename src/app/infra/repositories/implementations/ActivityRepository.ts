@@ -1,6 +1,6 @@
-import { EntityRepository, Repository } from 'typeorm';
-import Activity from '../../models/Activity';
-import IActivityRepository from '../IActivityRepository';
+import { EntityRepository, Repository } from "typeorm";
+import Activity from "../../../domain/models/Activity";
+import IActivityRepository from "../IActivityRepository";
 
 @EntityRepository(Activity)
 class Activityrepository implements IActivityRepository {

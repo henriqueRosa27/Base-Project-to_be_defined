@@ -1,7 +1,7 @@
-import { Repository, EntityRepository } from 'typeorm';
-import { injectable } from 'inversify';
-import IUserRepository from '../IUserRepository';
-import User from '../../models/User';
+import { Repository, EntityRepository } from "typeorm";
+import { injectable } from "inversify";
+import IUserRepository from "../IUserRepository";
+import User from "../../../domain/models/User";
 
 @injectable()
 @EntityRepository(User)

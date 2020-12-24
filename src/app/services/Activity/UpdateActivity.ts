@@ -1,6 +1,6 @@
-import IActivityRepository from '../../repositories/IActivityRepository';
-import Activity from '../../models/Activity';
-import AppError from '../../application/errors/AppError';
+import IActivityRepository from "../../infra/repositories/IActivityRepository";
+import Activity from "../../domain/models/Activity";
+import AppError from "../../application/errors/AppError";
 
 interface Request {
   name: string;
@@ -25,7 +25,7 @@ class UpdateActivity {
     const activity = await this.rep.findById(id);
 
     if (!activity) {
-      throw new AppError('Activity not found', 404);
+      throw new AppError("Activity not found", 404);
     }
 
     activity.name = name;

@@ -1,5 +1,5 @@
-import IActivityDeliveryRepository from '../../repositories/IActivityDeliveryRepository';
-import ActivityDelivery from '../../models/ActivityDelivery';
+import IActivityDeliveryRepository from "../../infra/repositories/IActivityDeliveryRepository";
+import ActivityDelivery from "../../domain/models/ActivityDelivery";
 
 interface Request {
   idActivity: string;
@@ -19,7 +19,7 @@ class GetByUserActivityDelivery {
   }: Request): Promise<ActivityDelivery> {
     const activities = await this.rep.findByUserIdAndActivityId(
       idActivity,
-      userId
+      userId,
     );
 
     return activities || new ActivityDelivery();

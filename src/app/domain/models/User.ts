@@ -6,13 +6,13 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToMany,
-} from 'typeorm';
-import Class from './Class';
-import ActivityDelivery from './ActivityDelivery';
+} from "typeorm";
+import Class from "./Class";
+import ActivityDelivery from "./ActivityDelivery";
 
-@Entity('user')
+@Entity("user")
 class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -27,22 +27,22 @@ class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Class, teaching_classes => teaching_classes.teacher)
+  @OneToMany(() => Class, (teaching_classes) => teaching_classes.teacher)
   teaching_classes: Class[];
 
   @OneToMany(
     () => ActivityDelivery,
-    deliveredActivities => deliveredActivities.student
+    (deliveredActivities) => deliveredActivities.student,
   )
   deliveredActivities: ActivityDelivery[];
 
-  @ManyToMany(() => Class, student_classes => student_classes.students)
+  @ManyToMany(() => Class, (student_classes) => student_classes.students)
   student_classes: Class[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 }
 

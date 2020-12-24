@@ -1,7 +1,7 @@
-import uniqid from 'uniqid';
-import Class from '../../models/Class';
-import IClassRepository from '../../repositories/IClassRepository';
-import User from '../../models/User';
+import uniqid from "uniqid";
+import Class from "../../domain/models/Class";
+import IClassRepository from "../../infra/repositories/IClassRepository";
+import User from "../../domain/models/User";
 
 interface Request {
   name: string;

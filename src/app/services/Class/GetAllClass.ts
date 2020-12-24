@@ -1,5 +1,5 @@
-import IClassRepository from '../../repositories/IClassRepository';
-import Class from '../../models/Class';
+import IClassRepository from "../../infra/repositories/IClassRepository";
+import Class from "../../domain/models/Class";
 
 class GetAllClass {
   private rep: IClassRepository;
@@ -10,7 +10,7 @@ class GetAllClass {
 
   public async execute(idUser: string): Promise<Class[]> {
     const classes = await this.rep.getAll(idUser);
-    return classes.map(data => {
+    return classes.map((data) => {
       delete data.teacher.password;
       return data;
     });

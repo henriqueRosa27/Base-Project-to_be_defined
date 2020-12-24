@@ -1,13 +1,13 @@
-import { Route, Controller, Body, Post } from 'tsoa';
-import { provide } from 'inversify-binding-decorators';
-import { inject } from 'inversify';
+import { Route, Controller, Body, Post } from "tsoa";
+import { provide } from "inversify-binding-decorators";
+import { inject } from "inversify";
 
-import { SERVICE_TYPES as TYPES } from '../../ioc/types';
-import { CreateUser } from '../dto/User';
-import CreateUserService from '../../services/User/CreateUser';
+import { SERVICE_TYPES as TYPES } from "../../ioc/types";
+import { CreateUser } from "../../application/dto/User";
+import CreateUserService from "../../services/User/CreateUser";
 
 @provide(UserController)
-@Route('user')
+@Route("user")
 export class UserController extends Controller {
   @inject(TYPES.createUser)
   private readonly _createUserService: CreateUserService;

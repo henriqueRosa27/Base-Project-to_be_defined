@@ -1,6 +1,6 @@
-import Class from '../../models/Class';
-import IClassRepository from '../../repositories/IClassRepository';
-import AppError from '../../application/errors/AppError';
+import Class from "../../domain/models/Class";
+import IClassRepository from "../../infra/repositories/IClassRepository";
+import AppError from "../../application/errors/AppError";
 
 interface Request {
   name: string;
@@ -18,7 +18,7 @@ class UpdateClass {
   public async execute({ name, description, id }: Request): Promise<Class> {
     const entity = await this.rep.findById(id);
     if (!entity) {
-      throw new AppError('Class not found', 404);
+      throw new AppError("Class not found", 404);
     }
 
     entity.name = name;

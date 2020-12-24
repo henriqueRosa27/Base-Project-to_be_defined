@@ -9,7 +9,7 @@ import AppError from "./app/application/errors/AppError";
 import uploadConfig from "./config/multer";
 
 import "dotenv/config";
-import "./database";
+import "./app/infra/database";
 
 const app = express();
 
@@ -47,6 +47,7 @@ app.use(function errorHandler(
     });
   }
   if (err instanceof Error) {
+    console.log(err);
     return res.status(500).json({
       message: "Internal Server Error",
       err: err.message,

@@ -1,6 +1,6 @@
-import IClassRepository from '../../repositories/IClassRepository';
-import AppError from '../../application/errors/AppError';
-import User from '../../models/User';
+import IClassRepository from "../../infra/repositories/IClassRepository";
+import AppError from "../../application/errors/AppError";
+import User from "../../domain/models/User";
 
 interface Request {
   code: string;
@@ -22,14 +22,14 @@ class LinkByCode {
     const entity = await this.rep.findByCode(code);
 
     if (!entity) {
-      throw new AppError('Class not found', 404);
+      throw new AppError("Class not found", 404);
     }
 
     if (
-      entity.students.some(student => student.id === userId) ||
+      entity.students.some((student) => student.id === userId) ||
       entity.teacher.id === userId
     ) {
-      throw new AppError('User already linked', 400);
+      throw new AppError("User already linked", 400);
     }
 
     const user = new User();
@@ -40,7 +40,7 @@ class LinkByCode {
     await this.rep.update(entity);
 
     return {
-      message: 'Usuário vinculado com sucesso',
+      message: "Usuário vinculado com sucesso",
     };
   }
 }

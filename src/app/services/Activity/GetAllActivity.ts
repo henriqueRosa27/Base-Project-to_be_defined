@@ -1,5 +1,5 @@
-import IActivityRepository from '../../repositories/IActivityRepository';
-import Activity from '../../models/Activity';
+import IActivityRepository from "../../infra/repositories/IActivityRepository";
+import Activity from "../../domain/models/Activity";
 
 interface Request {
   idClass: string;

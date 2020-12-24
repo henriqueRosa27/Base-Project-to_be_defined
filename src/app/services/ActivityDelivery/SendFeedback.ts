@@ -1,6 +1,6 @@
-import IActivityDeliveryRepository from '../../repositories/IActivityDeliveryRepository';
-import ActivityDelivery from '../../models/ActivityDelivery';
-import AppError from '../../application/errors/AppError';
+import IActivityDeliveryRepository from "../../infra/repositories/IActivityDeliveryRepository";
+import ActivityDelivery from "../../domain/models/ActivityDelivery";
+import AppError from "../../application/errors/AppError";
 
 interface Request {
   feedback: string;
@@ -18,7 +18,7 @@ class SendFeedbackActivitydelivery {
     const activity = await this.rep.findById(id);
 
     if (!activity) {
-      throw new AppError('Activity Delivery not found', 404);
+      throw new AppError("Activity Delivery not found", 404);
     }
 
     activity.feedback = feedback;

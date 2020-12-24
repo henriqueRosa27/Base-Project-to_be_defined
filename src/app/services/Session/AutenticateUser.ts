@@ -1,12 +1,12 @@
-import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
-import { provide } from 'inversify-binding-decorators';
-import { inject } from 'inversify';
+import { compare } from "bcryptjs";
+import { sign } from "jsonwebtoken";
+import { provide } from "inversify-binding-decorators";
+import { inject } from "inversify";
 
-import IUserRepository from '../../repositories/IUserRepository';
-import AppError from '../../application/errors/AppError';
-import AuthConfig from '../../../config/auth';
-import User from '../../models/User';
+import IUserRepository from "../../infra/repositories/IUserRepository";
+import AppError from "../../application/errors/AppError";
+import AuthConfig from "../../../config/auth";
+import User from "../../domain/models/User";
 
 interface Request {
   email: string;
@@ -30,13 +30,13 @@ class AutenticanteUser {
     const user = await this.rep.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Incorrect email/password combination', 401);
+      throw new AppError("Incorrect email/password combination", 401);
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Incorrect email/password combination', 401);
+      throw new AppError("Incorrect email/password combination", 401);
     }
 
     const { secret, expiresIn } = AuthConfig.jwt;

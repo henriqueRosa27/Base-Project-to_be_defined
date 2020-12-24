@@ -1,4 +1,4 @@
-import Activity from '../models/Activity';
+import Activity from "../../domain/models/Activity";
 
 interface IActivityRepository {
   getAll(idClass: string): Promise<Activity[]>;
