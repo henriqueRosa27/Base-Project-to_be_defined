@@ -4,6 +4,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { urlencoded, json } from "body-parser";
 
+import { ValidateError } from "tsoa";
 import { RegisterRoutes } from "../build/routes";
 import AppError from "./app/application/errors/AppError";
 import uploadConfig from "./config/multer";
@@ -44,6 +45,12 @@ app.use(function errorHandler(
     return res.status(err.statusCode).json({
       status: "error",
       message: err.message,
+    });
+  }
+  if (err instanceof ValidateError) {
+    return res.status(500).json({
+      message: "teste",
+      err: err.message,
     });
   }
   if (err instanceof Error) {

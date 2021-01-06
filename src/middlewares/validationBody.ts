@@ -6,10 +6,11 @@ const validate = async (
   schema: ObjectSchema,
 ): Promise<void> => {
   try {
-    await schema.validate(data, {
+    await schema.validateAt(data, {
       abortEarly: false,
     });
   } catch (error) {
+    console.log("teste");
     const array = error.inner.map((err: ValidationError) => ({
       message: err.errors[0],
       label: err.path,
