@@ -29,7 +29,7 @@ studentClassRouter.post(
     const { code } = request.body;
 
     const data = await linkByCode.execute({
-      code,
+      code: code.toLowerCase(),
       userId: request.user.id,
     });
 
@@ -51,7 +51,7 @@ studentClassRouter.post(
     const { email, id_class } = request.body;
 
     const data = await linkByCode.execute({
-      email,
+      email: email.toLowerCase(),
       idClass: id_class,
     });
 

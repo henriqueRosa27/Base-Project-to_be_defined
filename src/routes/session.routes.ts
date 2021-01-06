@@ -20,7 +20,7 @@ sessionsRouter.post(
     );
 
     const { user, token } = await authenticateUser.execute({
-      email,
+      email: email.toLowerCase(),
       password,
     });
 
