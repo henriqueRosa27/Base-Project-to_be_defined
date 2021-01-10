@@ -1,6 +1,6 @@
-import { Repository, EntityRepository } from 'typeorm';
-import IUserRepository from '../IUserRepository';
-import User from '../../models/User';
+import { Repository, EntityRepository } from "typeorm";
+import IUserRepository from "../IUserRepository";
+import User from "../../models/User";
 
 @EntityRepository(User)
 class UserRepository implements IUserRepository {

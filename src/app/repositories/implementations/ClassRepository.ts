@@ -1,6 +1,6 @@
-import { Repository, EntityRepository } from 'typeorm';
-import IClassRepository from '../IClassRepository';
-import Class from '../../models/Class';
+import { Repository, EntityRepository } from "typeorm";
+import IClassRepository from "../IClassRepository";
+import Class from "../../models/Class";
 
 @EntityRepository(Class)
 class ClassRepository implements IClassRepository {
@@ -12,26 +12,31 @@ class ClassRepository implements IClassRepository {
 
   getAll(idUser: string): Promise<Class[]> {
     return this.rep
-      .createQueryBuilder('class')
-      .leftJoin('student_class', 'std', 'std.class_id = class.id')
-      .leftJoinAndSelect('class.teacher', 'teacher')
-      .where('std.student_id = :id', { id: idUser })
-      .orWhere('class.teacher_id = :id', { id: idUser })
+      .createQueryBuilder("class")
+      .leftJoin("student_class", "std", "std.class_id = class.id")
+      .leftJoinAndSelect("class.teacher", "teacher")
+      .where("std.student_id = :id", { id: idUser })
+      .orWhere("class.teacher_id = :id", { id: idUser })
       .getMany();
   }
 
   findById(id: string): Promise<Class | undefined> {
-    return this.rep.findOne(id, { relations: ['teacher'] });
+    return this.rep
+      .createQueryBuilder("class")
+      .leftJoinAndSelect("class.teacher", "teacher")
+      .where("class.id = :id", { id })
+      .loadRelationCountAndMap("class.totalStudents", "class.students")
+      .getOne();
   }
 
   findByIdIncludeStudents(id: string): Promise<Class | undefined> {
-    return this.rep.findOne(id, { relations: ['teacher', 'students'] });
+    return this.rep.findOne(id, { relations: ["teacher", "students"] });
   }
 
   findByCode(code: string): Promise<Class | undefined> {
     return this.rep.findOne({
       where: { code },
-      relations: ['teacher', 'students'],
+      relations: ["teacher", "students"],
     });
   }
 

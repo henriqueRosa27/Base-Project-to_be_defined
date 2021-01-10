@@ -7,13 +7,14 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
-} from 'typeorm';
-import Class from './Class';
-import ActivityDelivery from './ActivityDelivery';
+  AfterLoad,
+} from "typeorm";
+import Class from "./Class";
+import ActivityDelivery from "./ActivityDelivery";
 
-@Entity('activity')
+@Entity("activity")
 class Activity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -25,21 +26,35 @@ class Activity {
   @Column()
   deadline: Date;
 
+  hasAnswer: boolean;
+
+  totalAnswer: number;
+
   @ManyToOne(() => Class, cls => cls.activities)
-  @JoinColumn({ name: 'class_id' })
+  @JoinColumn({ name: "class_id" })
   team: Class;
+
+  @Column({ name: "class_id", select: false })
+  class_id: Class;
 
   @OneToMany(
     () => ActivityDelivery,
     deliveredActivities => deliveredActivities.activity
   )
-  deliveredActivities: Class;
+  deliveredActivities: ActivityDelivery[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
+
+  @AfterLoad()
+  getHasAnswer(): void {
+    if (this.hasAnswer !== undefined) {
+      this.hasAnswer = Boolean(this.hasAnswer);
+    }
+  }
 }
 
 export default Activity;

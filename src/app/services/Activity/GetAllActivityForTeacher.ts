@@ -1,5 +1,5 @@
-import IActivityRepository from '../../repositories/IActivityRepository';
-import Activity from '../../models/Activity';
+import IActivityRepository from "../../repositories/IActivityRepository";
+import Activity from "../../models/Activity";
 
 interface Request {
   idClass: string;
@@ -13,7 +13,7 @@ class GetAllActivity {
   }
 
   public async execute({ idClass }: Request): Promise<Activity[]> {
-    const activities = await this.rep.getAll(idClass);
+    const activities = await this.rep.getAllForTeacher(idClass);
     return activities;
   }
 }

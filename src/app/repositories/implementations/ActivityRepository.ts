@@ -1,6 +1,6 @@
-import { EntityRepository, Repository } from 'typeorm';
-import Activity from '../../models/Activity';
-import IActivityRepository from '../IActivityRepository';
+import { EntityRepository, Repository } from "typeorm";
+import Activity from "../../models/Activity";
+import IActivityRepository from "../IActivityRepository";
 
 @EntityRepository(Activity)
 class Activityrepository implements IActivityRepository {
@@ -10,14 +10,28 @@ class Activityrepository implements IActivityRepository {
     this.rep = rep;
   }
 
-  getAll(idClass: string): Promise<Activity[]> {
-    return this.rep.find({
-      where: {
-        team: {
-          id: idClass,
-        },
-      },
-    });
+  getAllForStudent(idClass: string, idUser: string): Promise<Activity[]> {
+    const teste = this.rep
+      .createQueryBuilder("activity")
+      .where("activity.class_id = :idClass", { idClass })
+      .loadRelationCountAndMap(
+        "activity.hasAnswer",
+        "activity.deliveredActivities",
+        "hasAnswer",
+        qb => qb.where({ studentId: idUser })
+      );
+    return teste.getMany();
+  }
+
+  getAllForTeacher(idClass: string): Promise<Activity[]> {
+    const teste = this.rep
+      .createQueryBuilder("activity")
+      .where("activity.class_id = :idClass", { idClass })
+      .loadRelationCountAndMap(
+        "activity.totalAnswer",
+        "activity.deliveredActivities"
+      );
+    return teste.getMany();
   }
 
   findById(id: string): Promise<Activity | undefined> {

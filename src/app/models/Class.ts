@@ -8,13 +8,13 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-} from 'typeorm';
-import User from './User';
-import Activity from './Activity';
+} from "typeorm";
+import User from "./User";
+import Activity from "./Activity";
 
-@Entity('class')
+@Entity("class")
 class Class {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -26,11 +26,11 @@ class Class {
   @Column()
   code: string;
 
-  @Column({ name: 'teacher_id', select: false })
+  @Column({ name: "teacher_id", select: false })
   teacherId: string;
 
   @ManyToOne(() => User, teacher => teacher.teaching_classes)
-  @JoinColumn({ name: 'teacher_id' })
+  @JoinColumn({ name: "teacher_id" })
   teacher: User;
 
   @ManyToMany(() => Activity, activity => activity.team)
@@ -38,16 +38,18 @@ class Class {
 
   @ManyToMany(() => User, students => students.student_classes)
   @JoinTable({
-    name: 'student_class',
-    joinColumn: { name: 'class_id' },
-    inverseJoinColumn: { name: 'student_id' },
+    name: "student_class",
+    joinColumn: { name: "class_id" },
+    inverseJoinColumn: { name: "student_id" },
   })
   students: User[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  totalStudents: number;
+
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 }
 

@@ -6,19 +6,19 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-} from 'typeorm';
-import Activity from './Activity';
-import User from './User';
+} from "typeorm";
+import Activity from "./Activity";
+import User from "./User";
 
-@Entity('activity_delivery')
+@Entity("activity_delivery")
 class ActivityDelivery {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   note: string;
 
-  @Column({ name: 'delivery_date' })
+  @Column({ name: "delivery_date" })
   deliveryDate: Date;
 
   @Column()
@@ -30,24 +30,24 @@ class ActivityDelivery {
   @Column()
   image: string;
 
-  @Column({ name: 'activity_id', select: false })
+  @Column({ name: "activity_id", select: false })
   activityId: string;
 
-  @Column({ name: 'student_id', select: false })
+  @Column({ name: "student_id", select: false })
   studentId: string;
 
   @ManyToOne(() => Activity, activity => activity.deliveredActivities)
-  @JoinColumn({ name: 'activity_id' })
+  @JoinColumn({ name: "activity_id" })
   activity: Activity;
 
   @ManyToOne(() => User, student => student.deliveredActivities)
-  @JoinColumn({ name: 'student_id' })
+  @JoinColumn({ name: "student_id" })
   student: User;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 }
 
