@@ -35,7 +35,7 @@ class Activity {
   team: Class;
 
   @Column({ name: "class_id", select: false })
-  class_id: Class;
+  class_id: string;
 
   @OneToMany(
     () => ActivityDelivery,
